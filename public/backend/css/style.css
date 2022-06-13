@@ -3149,5 +3149,22 @@ span.text-alert {
     color: red;
     font-size: 16px;
     width: 100%;
-    font-weight: 700;
+}
+
+span.fa-thumb-styling.fa.fa-thumbs-up {
+    font-size: 20px;
+    color: green;
+}
+
+span.fa-thumb-styling.fa.fa-thumbs-down {
+    font-size: 20px;
+    color: red;
+}
+
+i.fa.fa-pencil-square-o.text-success.text-active {
+    font-size: 22px;
+}
+
+i.fa.fa-times.text-danger.text {
+    font-size: 22px;
 }
