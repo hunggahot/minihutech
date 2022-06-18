@@ -38,6 +38,7 @@ class CategoryProduct extends Controller
         $this->AuthLogin();
         $data = array();
         $data['category_name'] = $request->category_product_name;
+        $data['meta_keywords'] = $request->category_product_keywords;
         $data['category_des'] = $request->category_product_des;
         $data['category_status'] = $request->category_product_status;
 
@@ -71,6 +72,7 @@ class CategoryProduct extends Controller
         $this->AuthLogin();
         $data = array();
         $data['category_name'] = $request->category_product_name;
+        $data['meta_keywords'] = $request->category_product_keywords;
         $data['category_des'] = $request->category_product_des;
 
         DB::table('tbl_category_product')->where('category_id', $category_product_id)->update($data);
@@ -86,19 +88,24 @@ class CategoryProduct extends Controller
     }
 
     //Homepage Controller
-    public function show_category_home($category_id){
+    public function show_category_home(Request $request, $category_id){
+        
+
         $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
         $category_by_id = DB::table('tbl_product')->join('tbl_category_product', 'tbl_product.category_id', '=', 'tbl_category_product.category_id')->where('tbl_product.category_id', $category_id)->get();
+        
+        foreach($category_by_id as $key => $val){
+            //Seo
+            $meta_des = $val->category_des;
+            $meta_keywords = $val->meta_keywords;
+            $meta_title = $val->category_name;
+            $meta_canonical = $request->url();
+            //--Seo
+        }
+        
+        $category_name = DB::table('tbl_category_product')->where('tbl_category_product.category_id', $category_id)->limit(1)->get();
 
-        return view('pages.category.show_category')->with('category', $cate_product)->with('brand', $brand_product)->with('category_by_id', $category_by_id);
-    }
-
-    public function show_brand_home($brand_id){
-        $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
-        $category_by_id = DB::table('tbl_product')->join('tbl_category_product', 'tbl_product.category_id', '=', 'tbl_category_product.category_id')->where('tbl_product.category_id', $brand_id)->get();
-
-        return view('pages.category.show_category')->with('category', $cate_product)->with('brand', $brand_product)->with('category_by_id', $category_by_id);
+        return view('pages.category.show_category')->with('category', $cate_product)->with('brand', $brand_product)->with('category_by_id', $category_by_id)->with('category_name', $category_name)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical);
     }
 }

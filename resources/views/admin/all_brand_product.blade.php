@@ -99,5 +99,5 @@
       </footer>
     </div>
   </div>
-  </section>
+</div>
 @endsection

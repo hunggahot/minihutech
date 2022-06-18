@@ -19,11 +19,15 @@
                             {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên sản phẩm</label>
-                            <input type="text" name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên sản phẩm">
+                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="Tên sản phẩm phải có ít nhất 3 ký tự trở lên" name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên sản phẩm">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Slug sản phẩm</label>
+                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="Tên sản phẩm phải có ít nhất 3 ký tự trở lên" name="product_slug" class="form-control" id="exampleInputEmail1" placeholder="Tên sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm</label>
-                            <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Tên sản phẩm">
+                            <input type="text" data-validation="number" data-validation-error-msg="Số tiền phải là những con số" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Tên sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>
@@ -31,11 +35,11 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả sản phẩm</label>
-                            <textarea style="resize: none;" rows="8" name="product_des" class="form-control" id="exampleInputPassword1" placeholder="Mô tả sản phẩm"> </textarea>
+                            <textarea style="resize: none;" rows="8" name="product_des" class="form-control" id="ckeditor1" placeholder="Mô tả sản phẩm"> </textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nội dung sản phẩm</label>
-                            <textarea style="resize: none;" rows="8" name="product_content" class="form-control" id="exampleInputPassword1" placeholder="Mô tả nội dung sản phẩm"> </textarea>
+                            <textarea style="resize: none;" rows="8" name="product_content" class="form-control" id="ckeditor" placeholder="Mô tả nội dung sản phẩm"> </textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Danh mục sản phẩm</label>
@@ -56,8 +60,8 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Hiển thị</label>
                             <select name="product_status" class="form-control input-sm m-bot15">
-                                <option value="0">Ẩn</option>
-                                <option value="1">Hiển thị</option>
+                                <option value="0">Hiển thị</option>
+                                <option value="1">Ẩn</option>
                             </select>
                         </div>
                        

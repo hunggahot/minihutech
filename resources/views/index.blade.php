@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    {{------------------------------------ SEO -----------------------------------}}
+    <meta name="description" content="{{$meta_des}}">
+    <meta name="keywords" content="{{$meta_keywords}}">
+    <meta name="robots" content="">
+    <link rel="canonical" href="{{$meta_canonical}}">
     <meta name="author" content="">
-    <title>Home | E-Shopper</title>
+    <meta name="csrf-token" content="{{csrf_token()}}">
+    <link rel="icon" type="image/x-icon" href="">
+    {{------------------------------------ SEO -----------------------------------}}
+
+    {{-- <meta property="og:site_name" content="" />
+    <meta property="og:description" content="{{$meta_des}}" />
+    <meta property="og:title" content="{{$meta_title}}" />
+    <meta property="og:url" content="{{$meta_canonical}}" />
+    <meta property="og:type" content="website" /> --}}
+
+    <title>{{$meta_title}}</title>
     <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/prettyPhoto.css')}}" rel="stylesheet">
@@ -13,6 +27,7 @@
     <link href="{{asset('public/frontend/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/main.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -25,6 +40,8 @@
 </head><!--/head-->
 
 <body>
+    <?php
+    ?>
     <header id="header"><!--header-->
         <div class="header_top"><!--header_top-->
             <div class="container">
@@ -86,11 +103,39 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-                                <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li>
+
+                                <?php
+                                    $customer_id = Session::get('customer_id');
+                                    $shipping_id = Session::get('shipping_id');
+                                    if($customer_id != NULL && $shipping_id == NULL){ //có đăng nhập mà ko có thông tin vận chuyển
+                                ?>
+                                    <li><a href="{{URL::to('/checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
+                                <?php
+                                    } elseif($customer_id != NULL && $shipping_id != NULL) { //có đăng nhập và có thông tin vận chuyển
+                                ?>
+                                    <li><a href="{{URL::to('/payment')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
+                                <?php
+                                    } else{
+                                ?>
+                                    <li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
+                                <?php
+                                    }
+                                ?>
+                                <li><a href="{{URL::to('/show-cart-ajax')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+
+                                <?php
+                                    $customer_id = Session::get('customer_id');
+                                    if($customer_id != NULL ){
+                                ?>
+                                <li><a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
+                                <?php
+                                    } else {
+                                ?>
+                                <li><a href="{{URL::to('/login-checkout')}}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
+                                <?php
+                                    }
+                                ?>
                             </ul>
                         </div>
                     </div>
@@ -101,7 +146,7 @@
         <div class="header-bottom"><!--header-bottom-->
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-9">
+                    <div class="col-sm-7">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                                 <span class="sr-only">Toggle navigation</span>
@@ -125,15 +170,21 @@
                                 <li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
                                     
                                 </li> 
-                                <li><a href="404.html">Giỏ Hàng</a></li>
+                                <li><a href="{{URL::to('/show-cart')}}">Giỏ Hàng</a></li>
                                 <li><a href="contact-us.html">Liên Hệ</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="search_box pull-right">
-                            <input type="text" placeholder="Search"/>
-                        </div>
+                    <div class="col-sm-5">
+                        <form action="{{URL::to('/search')}}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="input group">
+                                <input style="height: 28px;
+                                border-top-left-radius: 5px;
+                                border-bottom-left-radius: 5px;" type="text" name="keywords_submit" placeholder="Tìm kiếm sản phẩm"/>
+                                <input style="margin-top: -3px; color:#666" type="submit" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -239,7 +290,7 @@
                 
                 <div class="col-sm-9 padding-right">
                     @yield('content') 
-                         {{-- gọi file home.blade.php từ đây --}}
+                         {{-- gọi file từ đây --}}
                     
                 </div>
             </div>
@@ -412,5 +463,51 @@
     <script src="{{asset('public/frontend/js/price-range.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0" nonce="s3Xe7law"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.add-to-cart').click(function(){
+                var id = $(this).data('id_product');
+                var cart_product_id = $('.cart_product_id_' + id).val();
+                var cart_product_name = $('.cart_product_name_' + id).val();
+                var cart_product_image = $('.cart_product_image_' + id).val();
+                var cart_product_price = $('.cart_product_price_' + id).val();
+                var cart_product_qty = $('.cart_product_qty_' + id).val();
+                // var _token = $('input[name = "_token"]').val();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    url: '{{url('/add-cart-ajax')}}',
+                    method: 'POST',
+                    data:{cart_product_id:cart_product_id, cart_product_name:cart_product_name, cart_product_image:cart_product_image, cart_product_price:cart_product_price, cart_product_qty:cart_product_qty,},
+                    success:function(){
+                        swal({
+                            title: "Đã thêm sản phẩm vào giỏ hàng",
+                            text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                            showCancelButton: true,
+                            cancelButtonText: "Xem tiếp",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "Đi đến giỏ hàng",
+                            closeOnConfirm: false
+                        },
+                        function() {
+                            window.location.href = "{{url('/show-cart-ajax')}}";
+                        });
+
+                        
+                    }
+                });
+            });
+        });
+    </script>
+    
 </body>
 </html>

@@ -6,12 +6,20 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests;
 session_start();
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        //Seo
+        $meta_des = "Siêu thị Mini giá rẻ, chất lượng. Đặc biệt dành cho sinh viên HUTECH";
+        $meta_keywords = "thuc pham, thực phẩm, thức uống";
+        $meta_title = "Siêu thị Mini HUTECH | Trang chủ";
+        $meta_canonical = $request->url();
+        //--Seo
+
         $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
 
@@ -22,6 +30,39 @@ class HomeController extends Controller
 
         $all_product = DB::table('tbl_product')->where('product_status', '0')->orderBy('product_id', 'desc')->limit(4)->get();
 
-        return view('pages.home')->with('category', $cate_product)->with('brand', $brand_product)->with('all_product', $all_product); //gọi file home.blade.php từ folder pages
+        return view('pages.home')->with('category', $cate_product)->with('brand', $brand_product)->with('all_product', $all_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical); //gọi file home.blade.php từ folder pages
+        // return view('pages.home')->with(compact('cate_product', 'brand_product', 'all_product')); //gọi file home.blade.php từ folder pages
+    }
+
+    public function search(Request $request){
+        //Seo
+        $meta_des = "Tìm kiếm sản phẩm";
+        $meta_keywords = "Tìm kiếm sản phẩm";
+        $meta_title = "Tìm kiếm sản phẩm";
+        $meta_canonical = $request->url();
+        //--Seo
+
+        $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
+        $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
+
+        $keywords = $request->keywords_submit;
+
+        $search_product = DB::table('tbl_product')->where('product_name', 'like', '%'.$keywords.'%')->get();
+
+
+        return view('pages.product.search')->with('category', $cate_product)->with('brand', $brand_product)->with('search_product', $search_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical);
+    }
+
+    public function send_mail(){
+        $to_name = "Siêu Thị Mini HUTECH";
+        $to_email = "lamquochung03042001@gmail.com";
+
+        $data = array("name"=> "Mail từ tài khoản khách hàng", "body" => "Mail nói về vấn đề hàng hóa");
+
+        Mail::send('pages.send_mail', $data, function ($message) use($to_name, $to_email){
+            $message->from($to_email)->subject('Test lần đầu làm chuyện ấy');
+            $message->to($to_email, $to_name);
+        });
+        return redirect('/')->with('message', '');
     }
 }
