@@ -33,4 +33,12 @@ class CouponController extends Controller
         session()->put('message', 'Thêm mã giảm giá thành công');
         return Redirect::to('insert-coupon');
     }
+
+    public function delete_coupon($coupon_id){
+        $coupon = Coupon::find($coupon_id);
+        $coupon->delete();
+
+        session()->put('message', 'Xóa mã giảm giá thành công');
+        return Redirect::to('list-coupon');
+    }
 }

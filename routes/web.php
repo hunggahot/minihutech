@@ -73,6 +73,7 @@ Route::post('/check-coupon', [CartController::class, 'check_coupon']);
 
 Route::get('/insert-coupon', [CouponController::class, 'insert_coupon']);
 Route::get('/list-coupon', [CouponController::class, 'list_coupon']);
+Route::get('/delete-coupon/{coupon_id}', [CouponController::class, 'delete_coupon']);
 
 Route::post('/insert-coupon-code', [CouponController::class, 'insert_coupon_code']);
 
