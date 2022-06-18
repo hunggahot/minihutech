@@ -5,10 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Coupon;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 session_start();
 
 class CouponController extends Controller
 {
+    public function unset_coupon(){
+        $coupon = Session::get('coupon');
+        if($coupon == true){
+            Session::forget('coupon');
+            return Redirect()->back()->with('message', 'Xóa mã khuyến mãi thành công');
+        }
+    }
+
     public function insert_coupon(){
         return view('admin.coupon.insert_coupon');
     }

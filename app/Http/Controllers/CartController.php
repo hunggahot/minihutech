@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests;
+use App\Models\Coupon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 session_start();
 
@@ -14,7 +14,35 @@ class CartController extends Controller
 {
     public function check_coupon(Request $request){
         $data = $request->all();
-        print_r($data);
+        $coupon = Coupon::where('coupon_code', $data['coupon'])->first();
+        if($coupon){
+            $count_coupon = $coupon->count();
+            if($count_coupon > 0){
+                $coupon_session = Session::get('coupon');
+                if($coupon_session == true){
+                    $is_valid = 0;
+                    if($is_valid == 0){
+                        $cou[] = array(
+                            'coupon_code' => $coupon->coupon_code,
+                            'coupon_condition' => $coupon->coupon_condition,
+                            'coupon_number' => $coupon->coupon_number,
+                        );
+                        session()->put('coupon', $cou);
+                    }
+                } else{
+                    $cou[] = array(
+                        'coupon_code' => $coupon->coupon_code,
+                        'coupon_condition' => $coupon->coupon_condition,
+                        'coupon_number' => $coupon->coupon_number,
+                    );
+                    session()->put('coupon', $cou);
+                }
+                session()->save();
+                return Redirect()->back()->with('message', 'Thêm mã giảm giá thành công');
+            }
+        } else{
+            return Redirect()->back()->with('error', 'Sai mã giảm giá');
+        }
     }
 
     public function show_cart_ajax(Request $request){
@@ -140,7 +168,8 @@ class CartController extends Controller
         $cart = Session::get('cart');
         if($cart == true){
             // Session::destroy();
-            session()->forget('cart');
+            Session::forget('cart');
+            Session::forget('coupon');
             return Redirect()->back()->with('message', 'Xóa tất cả sản phẩm thành công');
         }
     }

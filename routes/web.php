@@ -8,6 +8,7 @@ use App\Http\Controllers\Product;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\DeliveryController;
 use Illuminate\Support\Facades\Route;
 
 //frontend
@@ -74,6 +75,7 @@ Route::post('/check-coupon', [CartController::class, 'check_coupon']);
 Route::get('/insert-coupon', [CouponController::class, 'insert_coupon']);
 Route::get('/list-coupon', [CouponController::class, 'list_coupon']);
 Route::get('/delete-coupon/{coupon_id}', [CouponController::class, 'delete_coupon']);
+Route::get('/unset-coupon', [CouponController::class, 'unset_coupon']);
 
 Route::post('/insert-coupon-code', [CouponController::class, 'insert_coupon_code']);
 
@@ -108,3 +110,8 @@ Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
 //order
 Route::get('/manage-order', [CheckoutController::class, 'manage_order']);
 Route::get('/view-order/{orderId}', [CheckoutController::class, 'view_order']);
+
+//delivery
+Route::get('/delivery', [DeliveryController::class, 'delivery']);
+
+Route::post('/select-delivery', [DeliveryController::class, 'select_delivery']);

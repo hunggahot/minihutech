@@ -105,7 +105,7 @@ class AdminController extends Controller
 
 
     public function AuthLogin(){
-        $admin_id = Session::get('admin_id'); //có admin_id login
+        $admin_id = session()->get('admin_id'); //có admin_id login
         if($admin_id){
             return Redirect::to('dashboard');
         } else{
@@ -136,10 +136,12 @@ class AdminController extends Controller
         $admin_password = md5($data['admin_password']);
         $login = Login::where('admin_email', $admin_email)->where('admin_password', $admin_password)->first();
         $login_count = $login->count();
-        if($login_count){
-            session()->put('admin_name', $login->admin_name);
-            session()->put('admin_id', $login->admin_id);
-            return Redirect::to('/dashboard');
+        if($login){
+            if($login_count > 0){
+                session()->put('admin_name', $login->admin_name);
+                session()->put('admin_id', $login->admin_id);
+                return Redirect::to('/dashboard');
+            }
         } else{
             session()->put('message', 'Sai mật khẩu hoặc tài khoản. Vui lòng xem lại thông tin đăng nhập');
             return Redirect::to('/admin');

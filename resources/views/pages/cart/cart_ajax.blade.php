@@ -77,14 +77,41 @@
                             <a class="btn btn-default check_out" href="{{url('/delete-all-product')}}">Xóa tất cả</a>
                         </td>
                         <td>
-                            
-                            <td colspan="2">
-                                <li>Tổng <span>{{number_format($total,0,',','.')}}<sup>đ</sup></span></li>
-                                <li>Thuế <span><sup>đ</sup></span></li>
-                                <li>Phí Ship <span>Free</span></li>
-                                <li>Thành Tiền <span><sup>đ</sup></span></li>
-                            </td>
+                            @if(Session::get('coupon'))
+                            <a class="btn btn-default check_out" href="{{url('/unset-coupon')}}">Xóa mã khuyến mãi</a>
+                            @endif
                         </td>
+                        
+                            <td colspan="2">
+                                <li>Tổng tiền: <span>{{number_format($total,0,',','.')}}<sup>đ</sup></span></li>
+                                @if(Session::get('coupon'))
+                                <li>
+                                        @foreach(Session::get('coupon') as $key => $cou)
+                                            @if($cou['coupon_condition'] == 1)
+                                                Mã giảm: {{$cou['coupon_number']}}%
+                                                <p>
+                                                    @php
+                                                        $total_coupon = ($total*$cou['coupon_number'])/100;
+                                                        echo '<p><li>Tổng giảm:'.number_format($total_coupon, 0,',','.').'<sup>đ</sup><li></p>';
+                                                    @endphp
+                                                </p>
+                                                <p><li>Tổng đã giảm: {{number_format($total - $total_coupon, 0,',','.')}}<sup>đ</sup></li></p>
+                                            @elseif($cou['coupon_condition'] == 2)
+                                                Mã giảm: {{number_format($cou['coupon_number'], 0,',','.')}}<sup>đ</sup>
+                                                <p>
+                                                    @php
+                                                        $total_coupon = $total - $cou['coupon_number'];
+                                                    @endphp
+                                                </p>
+                                                <p><li>Tổng đã giảm: {{number_format($total_coupon, 0,',','.')}}<sup>đ</sup><li></p>
+                                            @endif       
+                                        @endforeach
+                                    </li>
+                                    @endif
+                                {{-- <li>Thuế <span><sup>đ</sup></span></li>
+                                <li>Phí Ship <span>Free</span></li> --}}
+                            </td>
+                        
                     </tr>
                     @else
                     <tr>
@@ -97,13 +124,17 @@
                     @endif
                 </tbody>
                 </form>
-                <td>
-                    <form action="{{url('/check-coupon')}}" method="POST">
-                        {{ csrf_field() }}
-                        <input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
-                        <input type="submit" class="btn btn-default" name="check_coupon"  value="Tính mã giảm giá">
-                    </form>
-                </td>
+                @if(Session::get('cart'))
+                <tr><td>
+                        <form action="{{url('/check-coupon')}}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
+                            <input type="submit" class="btn btn-default" name="check_coupon"  value="Tính mã giảm giá">
+                            
+                        </form>
+                    </td>
+                </tr>
+                @endif
             </table>
         </div>
     </div>

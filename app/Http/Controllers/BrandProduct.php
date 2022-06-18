@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Session;
+use Illuminate\Support\Facades\Session;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
