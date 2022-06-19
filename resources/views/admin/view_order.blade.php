@@ -154,7 +154,7 @@
             </tr>
           </tbody>
         </table>
-        <a href="{{url('/print-order')}}">In đơn hàng</a>
+        <a target="_blank" href="{{url('/print-order/'.$details->order_code)}}">In đơn hàng</a>
       </div>
     </div>
   </div>

@@ -112,7 +112,7 @@ Route::get('/logout', [AdminController::class, 'logout']);
 Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
 
 //order
-Route::get('/print-order', [OrderController::class, 'print_order']);
+Route::get('/print-order/{checkout_code}', [OrderController::class, 'print_order']);
 Route::get('/manage-order', [OrderController::class, 'manage_order']);
 Route::get('/view-order/{order_code}', [OrderController::class, 'view_order']);
 
