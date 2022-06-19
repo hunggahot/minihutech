@@ -44,7 +44,7 @@ class CategoryProduct extends Controller
 
         DB::table('tbl_category_product')->insert($data);
         session()->put('message', 'Thêm danh mục sản phẩm thành công');
-        return Redirect::to('add-category-product');
+        return Redirect::to('all-category-product');
     }
 
     public function unactive_category_product($category_product_id){
@@ -95,7 +95,7 @@ class CategoryProduct extends Controller
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
         $category_by_id = DB::table('tbl_product')->join('tbl_category_product', 'tbl_product.category_id', '=', 'tbl_category_product.category_id')->where('tbl_product.category_id', $category_id)->get();
         
-        foreach($category_by_id as $key => $val){
+        foreach($cate_product as $key => $val){
             //Seo
             $meta_des = $val->category_des;
             $meta_keywords = $val->meta_keywords;

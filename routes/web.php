@@ -9,6 +9,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 //frontend
@@ -84,11 +85,14 @@ Route::get('/login-checkout', [CheckoutController::class, 'login_checkout']);
 Route::get('/logout-checkout', [CheckoutController::class, 'logout_checkout']);
 Route::get('/checkout', [CheckoutController::class, 'show_checkout']);
 Route::get('/payment', [CheckoutController::class, 'payment']);
+Route::get('/delete-fee', [CheckoutController::class, 'delete_fee']);
 
 Route::post('/add-customer', [CheckoutController::class, 'add_customer']);
 Route::post('/login-customer', [CheckoutController::class, 'login_customer']);
 Route::post('/save-checkout', [CheckoutController::class, 'save_checkout']);
 Route::post('/order-place', [CheckoutController::class, 'order_place']);
+Route::post('/select-delivery-home', [CheckoutController::class, 'select_delivery_home']);
+Route::post('/calculate-fee', [CheckoutController::class, 'calculate_fee']);
 
 //send mail
 Route::get('/send-mail', [HomeController::class, 'send_mail']);
@@ -108,10 +112,16 @@ Route::get('/logout', [AdminController::class, 'logout']);
 Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
 
 //order
-Route::get('/manage-order', [CheckoutController::class, 'manage_order']);
-Route::get('/view-order/{orderId}', [CheckoutController::class, 'view_order']);
+Route::get('/print-order', [OrderController::class, 'print_order']);
+Route::get('/manage-order', [OrderController::class, 'manage_order']);
+Route::get('/view-order/{order_code}', [OrderController::class, 'view_order']);
+
+Route::post('/confirm-order', [CheckoutController::class, 'confirm_order']);
 
 //delivery
 Route::get('/delivery', [DeliveryController::class, 'delivery']);
 
 Route::post('/select-delivery', [DeliveryController::class, 'select_delivery']);
+Route::post('/insert-delivery', [DeliveryController::class, 'insert_delivery']);
+Route::post('/select-feeship', [DeliveryController::class, 'select_feeship']);
+Route::post('/update-delivery', [DeliveryController::class, 'update_delivery']);
