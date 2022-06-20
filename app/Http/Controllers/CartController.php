@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Coupon;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Models\Coupon;
+use App\Models\Slider;
 session_start();
 
 class CartController extends Controller
@@ -55,8 +56,9 @@ class CartController extends Controller
  
          $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
          $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
+         $slider = Slider::orderBy('slider_id','desc')->where('slider_status','1')->take(4)->get();
          
-         return view('pages.cart.cart_ajax')->with('category', $cate_product)->with('brand', $brand_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical);
+         return view('pages.cart.cart_ajax')->with('category', $cate_product)->with('brand', $brand_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider);
     }
 
     public function add_cart_ajax(Request $request){
@@ -127,8 +129,9 @@ class CartController extends Controller
 
         $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
+        $slider = Slider::orderBy('slider_id','desc')->where('slider_status','1')->take(4)->get();
         
-        return view('pages.cart.show_cart')->with('category', $cate_product)->with('brand', $brand_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical);
+        return view('pages.cart.show_cart')->with('category', $cate_product)->with('brand', $brand_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider);
     }
 
     public function delete_product_cart($session_id){

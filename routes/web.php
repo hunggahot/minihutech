@@ -10,9 +10,10 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SliderController;
 use Illuminate\Support\Facades\Route;
 
-//frontend
+//main
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/homepage', [HomeController::class, 'index']); // gọi hàm index từ controller ra trang chủ
 Route::post('/search', [HomeController::class, 'search']); 
@@ -33,6 +34,8 @@ Route::get('/active-category-product/{category_product_id}', [CategoryProduct::c
 
 Route::post('/update-category-product/{category_product_id}', [CategoryProduct::class, 'update_category_product']);
 Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
+Route::post('/export-csv', [CategoryProduct::class, 'export_csv']);
+Route::post('/import-csv', [CategoryProduct::class, 'import_csv']);
 
 //brand product
 Route::get('/add-brand-product', [BrandProduct::class, 'add_brand_product']);
@@ -125,3 +128,12 @@ Route::post('/select-delivery', [DeliveryController::class, 'select_delivery']);
 Route::post('/insert-delivery', [DeliveryController::class, 'insert_delivery']);
 Route::post('/select-feeship', [DeliveryController::class, 'select_feeship']);
 Route::post('/update-delivery', [DeliveryController::class, 'update_delivery']);
+
+//banner
+Route::get('/manage-slider', [SliderController::class, 'manage_slider']);
+Route::get('/add-slider', [SliderController::class, 'add_slider']);
+
+Route::get('/active-slide/{slide_id}', [SliderController::class, 'active_slide']);
+Route::get('/unactive-slide/{slide_id}', [SliderController::class, 'unactive_slide']);
+
+Route::post('/insert-slider', [SliderController::class, 'insert_slider']);

@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ExcelImports;
+use App\Exports\ExcelExports;
+
+use App\Models\Slider;
+use App\Models\CategoryProductModels;
 session_start();
 
 class CategoryProduct extends Controller
@@ -93,6 +100,7 @@ class CategoryProduct extends Controller
 
         $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
+        $slider = Slider::orderBy('slider_id','desc')->where('slider_status','1')->take(4)->get();
         $category_by_id = DB::table('tbl_product')->join('tbl_category_product', 'tbl_product.category_id', '=', 'tbl_category_product.category_id')->where('tbl_product.category_id', $category_id)->get();
         
         foreach($cate_product as $key => $val){
@@ -106,6 +114,15 @@ class CategoryProduct extends Controller
         
         $category_name = DB::table('tbl_category_product')->where('tbl_category_product.category_id', $category_id)->limit(1)->get();
 
-        return view('pages.category.show_category')->with('category', $cate_product)->with('brand', $brand_product)->with('category_by_id', $category_by_id)->with('category_name', $category_name)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical);
+        return view('pages.category.show_category')->with('category', $cate_product)->with('brand', $brand_product)->with('category_by_id', $category_by_id)->with('category_name', $category_name)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider);
+    }
+
+    public function export_csv(){
+        return Excel::download(new ExcelExports , 'category_product.xlsx');
+    }
+    public function import_csv(Request $request){
+        $path = $request->file('file')->getRealPath();
+        Excel::import(new ExcelImports, $path);
+        return back();
     }
 }

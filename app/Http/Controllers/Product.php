@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use App\Models\Slider;
 session_start();
 
 class Product extends Controller
@@ -135,6 +136,7 @@ class Product extends Controller
     public function product_details(Request $request, $product_slug){
         $cate_product = DB::table('tbl_category_product')->where('category_status', '0')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
+        $slider = Slider::orderBy('slider_id','desc')->where('slider_status','1')->take(4)->get();
         $product_details = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id', '=','tbl_product.category_id')
         ->join('tbl_brand','tbl_brand.brand_id', '=','tbl_product.brand_id')
@@ -156,6 +158,6 @@ class Product extends Controller
         ->join('tbl_brand','tbl_brand.brand_id', '=','tbl_product.brand_id')
         ->where('tbl_category_product.category_id', $category_id)->whereNotIn('tbl_product.product_slug', [$product_slug])->get();
 
-        return view('pages.product.show_details')->with('category', $cate_product)->with('brand', $brand_product)->with('product_details', $product_details)->with('related', $product_related)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical);
+        return view('pages.product.show_details')->with('category', $cate_product)->with('brand', $brand_product)->with('product_details', $product_details)->with('related', $product_related)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider);
     }
 }
