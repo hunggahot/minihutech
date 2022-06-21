@@ -23,7 +23,11 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Slug sản phẩm</label>
-                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="Tên sản phẩm phải có ít nhất 3 ký tự trở lên" name="product_slug" class="form-control" id="exampleInputEmail1" placeholder="Tên sản phẩm">
+                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="slug sản phẩm phải có ít nhất 3 ký tự trở lên" name="product_slug" class="form-control" id="exampleInputEmail1" placeholder="Tên sản phẩm">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Số lượng</label>
+                            <input type="text" data-validation="number" data-validation-error-msg="Vui lòng nhập số lượng sản phẩm" name="product_quantity" class="form-control" id="exampleInputEmail1" placeholder="Điền số lượng sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm</label>

@@ -182,7 +182,77 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
 <script src="{{asset('public/backend/ckeditor/ckeditor.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.79/jquery.form-validator.min.js" integrity="sha512-7+hQkXGIswtBWoGbyajZqqrC8sa3OYW+gJw5FzW/XzU/lq6kScphPSlj4AyJb91MjPkQc+mPQ3bZ90c/dcUO5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    $('.update_quantity_order').click(function(){
+        var order_product_id = $(this).data('product_id');
+        var order_qty = $('.order_qty_'+order_product_id).val();
+        var order_code = $('.order_code').val();
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+                url : '{{url('/update-qty')}}',
 
+                method: 'POST',
+
+                data:{_token:_token, order_product_id:order_product_id ,order_qty:order_qty ,order_code:order_code},
+                // dataType:"JSON",
+                success:function(data){
+
+                    alert('Cập nhật số lượng thành công');
+                 
+                   location.reload();
+                }
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+    $('.order_details').change(function(){
+        var order_status = $(this).val();
+        var order_id = $(this).children(":selected").attr("id");
+        var _token = $('input[name="_token"]').val();
+
+        //lay ra so luong
+        quantity = [];
+        $("input[name='product_sales_quantity']").each(function(){
+            quantity.push($(this).val());
+        });
+        //lay ra product id
+        order_product_id = [];
+        $("input[name='order_product_id']").each(function(){
+            order_product_id.push($(this).val());
+        });
+        j = 0;
+        for(i=0;i<order_product_id.length;i++){
+            //so luong khach dat
+            var order_qty = $('.order_qty_' + order_product_id[i]).val();
+            //so luong ton kho
+            var order_qty_storage = $('.order_qty_storage_' + order_product_id[i]).val();
+
+            if(parseInt(order_qty)>parseInt(order_qty_storage)){
+                j = j + 1;
+                if(j==1){
+                    alert('Số lượng bán trong kho không đủ');
+                }
+                $('.color_qty_'+order_product_id[i]).css('background','red');
+            }
+        }
+        if(j==0){
+          
+                $.ajax({
+                        url : '{{url('/update-order-qty')}}',
+                            method: 'POST',
+                            data:{_token:_token, order_status:order_status ,order_id:order_id ,quantity:quantity, order_product_id:order_product_id},
+                            success:function(data){
+                                alert('Thay đổi tình trạng đơn hàng thành công');
+                                location.reload();
+                            }
+                });
+            
+        }
+
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function(){
 

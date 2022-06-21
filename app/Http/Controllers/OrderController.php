@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 
-
-use App\Models\FeeShip;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Shipping;
@@ -21,6 +19,50 @@ session_start();
 
 class OrderController extends Controller
 {
+	public function update_qty(Request $request){
+		$data = $request->all();
+		$order_details = OrderDetails::where('product_id',$data['order_product_id'])->where('order_code',$data['order_code'])->first();
+		$order_details->product_sales_quantity = $data['order_qty'];
+		$order_details->save();
+	}
+
+	public function update_order_qty(Request $request){
+		//update order
+		$data = $request->all();
+		$order = Order::find($data['order_id']);
+		$order->order_status = $data['order_status'];
+		$order->save();
+		if($order->order_status==2){
+			foreach($data['order_product_id'] as $key => $product_id){
+				$product = Product::find($product_id);
+				$product_quantity = $product->product_quantity;
+				$product_sold = $product->product_sold;
+				foreach($data['quantity'] as $key2 => $qty){
+					if($key==$key2){
+							$pro_remain = $product_quantity - $qty;
+							$product->product_quantity = $pro_remain;
+							$product->product_sold = $product_sold + $qty;
+							$product->save();
+					}
+				}
+			}
+		}elseif($order->order_status!=2 && $order->order_status!=3){
+			foreach($data['order_product_id'] as $key => $product_id){
+				$product = Product::find($product_id);
+				$product_quantity = $product->product_quantity;
+				$product_sold = $product->product_sold;
+				foreach($data['quantity'] as $key2 => $qty){
+					if($key==$key2){
+							$pro_remain = $product_quantity + $qty;
+							$product->product_quantity = $pro_remain;
+							$product->product_sold = $product_sold - $qty;
+							$product->save();
+					}
+				}
+			}
+		}
+	}
+
     public function print_order($checkout_code){
 		$pdf = \App::make('dompdf.wrapper');
 		$pdf->loadHTML($this->print_order_convert($checkout_code));
@@ -75,7 +117,7 @@ class OrderController extends Controller
 			border:1px solid #000;
 		}
 		</style>
-		<h1><centerCông ty TNHH một thành viên ABCD</center></h1>
+		<h1><center>Công ty TNHH một thành viên ABCD</center></h1>
 		<h4><center>Độc lập - Tự do - Hạnh phúc</center></h4>
 		<p>Người đặt hàng</p>
 		<table class="table-styling">

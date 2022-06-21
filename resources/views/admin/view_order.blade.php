@@ -97,6 +97,7 @@
             <tr>
               <th>STT</th>
               <th>Tên Sản phẩm</th>
+              <th>Số lượng kho</th>
               <th>Mã giảm giá</th>
               <th>Phí giao hàng</th>
               <th>Số lượng</th>
@@ -115,17 +116,28 @@
                   $subtotal = $details->product_price * $details->product_sales_quantity;
                   $total += $subtotal;
               @endphp
-              <tr>
+              <tr class="color_qty_{{$details->product_id}}">
                 <td><i>{{$i}}</i></td>
                 <td>{{$details->product_name}}</td>
-                <td>@if($details->product_coupon != 'no')
+                <td>{{$details->product->product_quantity}}</td>
+                <td>@if($details->product_coupon != 'không')
                       {{$details->product_coupon}}
                     @else
                       Không có mã giảm giá
                     @endif
                 </td>
                 <td>{{number_format($details->product_feeship ,0,',','.')}}<sup>đ</sup></td>
-                <td>{{$details->product_sales_quantity}}</td>
+                <td>
+                  <input type="number" min="1" {{$order_status == 2 ? 'disabled' : ''}} class="order_qty_{{$details->product_id}}" name="product_sales_quantity" value="{{$details->product_sales_quantity}}">
+
+                  <input type="hidden" name="order_qty_storage" class="order_qty_storage_{{$details->product_id}}" value="{{$details->product->product_quantity}}">
+                  <input type="hidden" name="order_code" class="order_code" value="{{$details->order_code}}">
+                  <input type="hidden" name="order_product_id" class="order_product_id" value="{{$details->product_id}}">
+
+                  @if($order_status != 2)
+                  <button class="btn btn-default update_quantity_order" data-product_id="{{$details->product_id}}" name="update_quantity_order">Cập nhật</button>
+                  @endif
+                </td>
                 <td>{{number_format($details->product_price ,0,',','.')}}<sup>đ</sup></td>
                 <td>{{number_format($subtotal ,0,',','.')}}<sup>đ</sup></td>
                 
@@ -150,6 +162,43 @@
                 @endif
                 Phí giao hàng: {{number_format($details->product_feeship ,0,',','.')}}<sup>đ</sup></br>
                 Thanh toán: {{number_format($total_coupon ,0,',','.')}}<sup>đ</sup>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                @foreach($order as $key => $or)
+                @if($or->order_status == 1)
+                <form>
+                  @csrf
+                  <select class="form-control order_details">
+                    <option value="">---Chọn trạng thái đơn hàng---</option>
+                    <option id="{{$or->order_id}}" selected value="1">Chưa xử lý</option>
+                    <option id="{{$or->order_id}}" value="2">Đã xử lý-Đã giao hàng</option>
+                    <option id="{{$or->order_id}}" value="3">Hủy đơn hàng-Tạm giữ</option>
+                  </select>
+                </form>
+                @elseif($or->order_status == 2)
+                <form>
+                  @csrf
+                  <select class="form-control order_details">
+                    <option value="">---Chọn trạng thái đơn hàng---</option>
+                    <option id="{{$or->order_id}}" value="1">Chưa xử lý</option>
+                    <option id="{{$or->order_id}}" selected value="2">Đã xử lý-Đã giao hàng</option>
+                    <option id="{{$or->order_id}}" value="3">Hủy đơn hàng-Tạm giữ</option>
+                  </select>
+                </form>
+                @else
+                <form>
+                  @csrf
+                  <select class="form-control order_details">
+                    <option value="">---Chọn trạng thái đơn hàng---</option>
+                    <option id="{{$or->order_id}}" value="1">Chưa xử lý</option>
+                    <option id="{{$or->order_id}}" value="2">Đã xử lý-Đã giao hàng</option>
+                    <option id="{{$or->order_id}}" selected value="3">Hủy đơn hàng-Tạm giữ</option>
+                  </select>
+                </form>
+                @endif
+                @endforeach
               </td>
             </tr>
           </tbody>

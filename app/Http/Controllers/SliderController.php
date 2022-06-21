@@ -64,7 +64,7 @@ class SliderController extends Controller
             $slider->slider_des = $data['slider_des'];
            	$slider->save();
             Session::put('message','Thêm slider thành công');
-            return Redirect::to('add-slider');
+            return Redirect::to('manage-slider');
         }else{
         	Session::put('message','Làm ơn thêm hình ảnh');
     		return Redirect::to('add-slider');

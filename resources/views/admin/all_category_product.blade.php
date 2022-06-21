@@ -18,6 +18,7 @@
             <tr>
               <th>STT</th>
               <th>Tên danh mục</th>
+              <th>Slug danh mục</th>
               <th>Trạng thái danh mục</th>
             </tr>
           </thead>
@@ -32,6 +33,7 @@
             <tr>
               <td><i>{{$i}}</i></td>
               <td>{{ $cate_pro -> category_name }}</td>
+              <td>{{ $cate_pro -> category_slug }}</td>
               <td><span class="text-ellipsis">
                 <?php
                     if($cate_pro -> category_status == 0){

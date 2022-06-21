@@ -110,7 +110,7 @@ class CartController extends Controller
         $data['qty'] = $quantity;
         $data['name'] = $product_info->product_name;
         $data['price'] = $product_info->product_price;
-        $data['weight'] = '123'; //mặc dù ko dùng tới nhưng phải khai báo vì đó nằm trong vendor shopping cart đã cài trước đó
+        $data['weight'] = $product_info->product_price; //mặc dù ko dùng tới nhưng phải khai báo vì đó nằm trong vendor shopping cart đã cài trước đó
         $data['options']['image'] = $product_info->product_image;
         Cart::add($data);
         Cart::setGlobalTax(10); //set % thuế

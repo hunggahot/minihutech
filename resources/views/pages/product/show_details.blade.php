@@ -36,17 +36,20 @@
             <p>Mã sản phẩm: {{$value->product_id}}</p>
             <img src="images/product-details/rating.png" alt="" />
             <form action="{{URL::to('/save-cart')}}" method="POST">
-                {{csrf_field()}}
-                <span>
-                    <span>{{number_format($value->product_price)}}<sup>đ</sup></span>
-                    <label>Số lượng:</label>
-                    <input name="qty" value="1" />
-                    <input name="product_id_hidden" type="hidden" value="{{$value->product_id}}" />
-                    <button type="submit" min="1" class="btn btn-fefault cart">
-                        <i class="fa fa-shopping-cart"></i>
-                        Thêm vào giỏ hàng
-                    </button>
-                </span>
+                @csrf
+                <input type="hidden" value="{{$value->product_id}}" class="cart_product_id_{{$value->product_id}}">
+                <input type="hidden" value="{{$value->product_name}}" class="cart_product_name_{{$value->product_id}}">
+                <input type="hidden" value="{{$value->product_image}}" class="cart_product_image_{{$value->product_id}}">
+                <input type="hidden" value="{{$value->product_price}}" class="cart_product_price_{{$value->product_id}}">
+                        
+            <span>
+                <span>{{number_format($value->product_price,0,',','.')}}<sup></sup></span>
+            
+                <label>Số lượng: </label>
+                <input name="qty" type="number" min="1" class="cart_product_qty_{{$value->product_id}}"  value="1" />
+                <input name="productid_hidden" type="hidden"  value="{{$value->product_id}}" />
+            </span>
+            <input type="button" value="Thêm giỏ hàng" class="btn btn-primary btn-sm add-to-cart" data-id_product="{{$value->product_id}}" name="add-to-cart">
             </form>
             <p><b>Tình trạng:</b> Còn hàng</p>
             <p><b>Điều kiện:</b> Mới</p>
@@ -148,5 +151,8 @@
           </a>			
     </div>
 </div><!--/recommended_items-->
+<ul class="pagination pagination-sm m-t-none m-b-none">
+    {!!$related->links()!!}
+   </ul>
 
 @endsection

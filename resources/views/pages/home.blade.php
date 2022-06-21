@@ -19,7 +19,7 @@
                         <input type="hidden" value="1" class="cart_product_qty_{{$product->product_id}}">
                         <a href="{{URL::to('/product-details/'.$product->product_slug)}}">
                         <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" />
-                        <h2>{{number_format($product->product_price)}}<sup>đ</sup></h2>
+                        <h2>{{number_format($product->product_price,0,',','.')}}<sup>đ</sup></h2>
                         <p>{{$product->product_name}}</p>
                         </a>
                         {{-- <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a> --}}
@@ -37,5 +37,8 @@
     </div>
     @endforeach
 </div><!--features_items-->
+<ul class="pagination pagination-sm m-t-none m-b-none">
+    {!!$all_product->links()!!}
+   </ul>
 
 @endsection

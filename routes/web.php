@@ -19,8 +19,8 @@ Route::get('/homepage', [HomeController::class, 'index']); // gọi hàm index t
 Route::post('/search', [HomeController::class, 'search']); 
 
 //homepage category product
-Route::get('/category-product/{category_id}', [CategoryProduct::class, 'show_category_home']); 
-Route::get('/brand-product/{brand_id}', [BrandProduct::class, 'show_brand_home']); 
+Route::get('/category-product/{category_slug}', [CategoryProduct::class, 'show_category_home']); 
+Route::get('/brand-product/{brand_slug}', [BrandProduct::class, 'show_brand_home']); 
 Route::get('/product-details/{product_slug}', [Product::class, 'product_details']); 
 
 //category product
@@ -119,6 +119,8 @@ Route::get('/print-order/{checkout_code}', [OrderController::class, 'print_order
 Route::get('/manage-order', [OrderController::class, 'manage_order']);
 Route::get('/view-order/{order_code}', [OrderController::class, 'view_order']);
 
+Route::post('/update-qty', [OrderController::class, 'update_qty']);
+Route::post('/update-order-qty', [OrderController::class, 'update_order_qty']);
 Route::post('/confirm-order', [CheckoutController::class, 'confirm_order']);
 
 //delivery

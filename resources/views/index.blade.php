@@ -160,17 +160,15 @@
                                 <li><a href="{{URL::to('/homepage')}}" class="active">Trang Chủ</a></li>
                                 <li class="dropdown"><a href="#">Sản Phẩm<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-                                        <li><a href="product-details.html">Product Details</a></li> 
-                                        <li><a href="checkout.html">Checkout</a></li> 
-                                        <li><a href="cart.html">Cart</a></li> 
-                                        <li><a href="login.html">Login</a></li> 
+                                        @foreach($category as $key => $cate1)
+                                        <li><a href="{{URL::to('/category-product/'.$cate1->category_slug)}}">{{$cate1->category_slug}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </li> 
                                 <li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
                                     
                                 </li> 
-                                <li><a href="{{URL::to('/show-cart')}}">Giỏ Hàng</a></li>
+                                <li><a href="{{URL::to('/show-cart-ajax')}}">Giỏ Hàng</a></li>
                                 <li><a href="contact-us.html">Liên Hệ</a></li>
                             </ul>
                         </div>
@@ -242,7 +240,7 @@
                             @foreach($category as $key => $cate)
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="{{URL::to('/category-product/'.$cate->category_id)}}">{{$cate->category_name}}</a></h4>
+                                    <h4 class="panel-title"><a href="{{URL::to('/category-product/'.$cate->category_slug)}}">{{$cate->category_name}}</a></h4>
                                 </div>
                             </div>
                             @endforeach
@@ -253,7 +251,7 @@
                             <div class="brands-name">
                                 <ul class="nav nav-pills nav-stacked">
                                     @foreach($brand as $key => $brand)
-                                    <li><a href="{{URL::to('/brand-product/'.$brand->brand_id)}}"> <span class="pull-right">(50)</span>{{$brand->brand_name}}</a></li>
+                                    <li><a href="{{URL::to('/brand-product/'.$brand->brand_slug)}}"> <span class="pull-right">(50)</span>{{$brand->brand_name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -505,18 +503,12 @@
                 var cart_product_image = $('.cart_product_image_' + id).val();
                 var cart_product_price = $('.cart_product_price_' + id).val();
                 var cart_product_qty = $('.cart_product_qty_' + id).val();
-                // var _token = $('input[name = "_token"]').val();
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+                var _token = $('input[name = "_token"]').val();
 
                 $.ajax({
                     url: '{{url('/add-cart-ajax')}}',
                     method: 'POST',
-                    data:{cart_product_id:cart_product_id, cart_product_name:cart_product_name, cart_product_image:cart_product_image, cart_product_price:cart_product_price, cart_product_qty:cart_product_qty,},
+                    data:{cart_product_id:cart_product_id, cart_product_name:cart_product_name, cart_product_image:cart_product_image, cart_product_price:cart_product_price, cart_product_qty:cart_product_qty, _token:_token},
                     success:function(){
                         swal({
                             title: "Đã thêm sản phẩm vào giỏ hàng",

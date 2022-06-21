@@ -42,6 +42,7 @@
                             $subtotal = $cart['product_price'] * $cart['product_qty'];
                             $total += $subtotal;
                         @endphp
+                    <tr>
                         <td class="cart_product">
                             <img src="{{asset('public/uploads/product/'.$cart['product_image'])}}" width="90" alt="{{$cart['product_name']}}" />
                         </td>

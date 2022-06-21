@@ -33,8 +33,8 @@ class HomeController extends Controller
         // ->join('tbl_brand','tbl_brand.brand_id', '=','tbl_product.brand_id')
         // ->orderBy('tbl_product.product_id', 'desc')->get();
 
-        $all_product = DB::table('tbl_product')->where('product_status', '0')->orderBy('product_id', 'desc')->limit(4)->get();
-
+        $all_product = DB::table('tbl_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(6); 
+        
         return view('pages.home')->with('category', $cate_product)->with('brand', $brand_product)->with('all_product', $all_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider); //gọi file home.blade.php từ folder pages
     }
 

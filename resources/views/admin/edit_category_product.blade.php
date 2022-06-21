@@ -19,8 +19,12 @@
                         <form role="form" action="{{URL::to('/update-category-product/'.$edit_value->category_id)}}" method="post">
                             {{csrf_field()}}
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Thên danh mục</label>
-                            <input type="text" value="{{$edit_value->category_name}}" name="category_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
+                            <label for="exampleInputEmail1">Thêm danh mục</label>
+                            <input type="text" value="{{$edit_value->category_name}}" name="category_product_name" class="form-control" id="exampleInputEmail1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Thêm Slug danh mục</label>
+                            <input type="text" value="{{$edit_value->category_slug}}" name="category_slug" class="form-control" id="exampleInputEmail1">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả danh mục</label>
