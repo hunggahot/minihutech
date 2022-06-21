@@ -78,6 +78,7 @@ class CartController extends Controller
                     'product_name' => $data['cart_product_name'],
                     'product_id' => $data['cart_product_id'],
                     'product_image' => $data['cart_product_image'],
+                    'product_quantity' => $data['cart_product_quantity'],
                     'product_price' => $data['cart_product_price'],
                     'product_qty' => $data['cart_product_qty'],
                 );
@@ -89,6 +90,7 @@ class CartController extends Controller
                 'product_name' => $data['cart_product_name'],
                 'product_id' => $data['cart_product_id'],
                 'product_image' => $data['cart_product_image'],
+                'product_quantity' => $data['cart_product_quantity'],
                 'product_price' => $data['cart_product_price'],
                 'product_qty' => $data['cart_product_qty'],
             );
@@ -153,15 +155,23 @@ class CartController extends Controller
         $data = $request->all();
         $cart = Session::get('cart');
         if($cart == true){
+            $message = '';
+
             foreach($data['cart_qty'] as $key => $qty){
+                $i = 0;
                 foreach($cart as $session => $val){
-                    if($val['session_id'] == $key){
+                    $i++;
+                    if($val['session_id'] == $key && $qty < $cart[$session]['product_quantity']){
                         $cart[$session]['product_qty'] = $qty;
+                        $message.='<p style="color: green">'.$i.') Cập nhật số lượng: '.$cart[$session]['product_name'].' thành công</p>';
+                    } elseif($val['session_id'] == $key && $qty > $cart[$session]['product_quantity']){
+                        $message.='<p style="color: red">'.$i.') Cập nhật số lượng: '.$cart[$session]['product_name'].' thất bại</p>';
                     }
                 }
             }
+
             session()->put('cart', $cart);
-            return Redirect()->back()->with('message', 'Cập nhật số lượng sản phẩm thành công');
+            return Redirect()->back()->with('message', $message);
         } else {
             return Redirect()->back()->with('message', 'Cập nhật số lượng sản phẩm thất bại');
         }

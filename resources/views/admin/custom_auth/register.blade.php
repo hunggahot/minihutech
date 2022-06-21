@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <head>
-<title>Admin</title>
+<title>Đăng ký Auth</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -24,7 +24,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <div class="log-w3">
 	<div class="w3layouts-main">
-			<h2>Đăng Nhập</h2>
+			<h2>Đăng Ký</h2>
 			<?php
 			$message = Session::get('message');
 			if($message){
@@ -32,7 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				Session::put('message', null);
 			}
 			?>
-			<form action="{{URL::to('/admin-dashboard')}}" method="post"> 
+			<form action="{{URL::to('/register')}}" method="post"> 
 				{{ csrf_field() }} <!-- //sản sinh trường token -->
 				@foreach($errors->all() as $val)
 				<ul>
@@ -40,12 +40,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</ul>
 					
 				@endforeach
+				<input type="text" class="ggg" name="admin_name" value="{{old('admin_name')}}" placeholder="Họ và tên">
 				<input type="email" class="ggg" name="admin_email" placeholder="Email">
+				<input type="number" class="ggg" name="admin_phone" value="{{old('admin_phone')}}" placeholder="Số điện thoại">
 				<input type="password" class="ggg" name="admin_password" placeholder="Mật khẩu">
-				<span><input type="checkbox" />Ghi nhớ tôi</span>
-				<h6><a href="#">Quên mật khẩu?</a></h6>
 					<div class="clearfix"></div>
-					<input type="submit" value="Đăng Nhập" name="login">
+					<input type="submit" value="Đăng Ký" name="login">
 
 					<div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
 					<br/>
@@ -55,10 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</span>
 					@endif
 			</form>
-			<a href="{{URL::to('/login-facebook')}}">Đăng nhập bằng Facbook</a> |
-			<a href="{{URL::to('/login-google')}}">Đăng nhập bằng Google</a> |
-			<a href="{{URL::to('/register-auth')}}">Đăng ký Auth</a> |
-			<a href="{{URL::to('/login-auth')}}">Đăng nhập Auth</a>
+            <a href="{{URL::to('/login-auth')}}">Đã có tài khoản Admin? Đăng nhập Admin</a> 
 	</div>		
 </div>
 <script src="{{asset('public/backend/js/bootstrap.js')}}"></script>

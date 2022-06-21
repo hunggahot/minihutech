@@ -12,6 +12,8 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\Social;
 use App\Rules\Captcha;
 use Dotenv\Validator;
+use Illuminate\Support\Facades\Auth;
+
 session_start();
 
 class AdminController extends Controller
@@ -105,7 +107,7 @@ class AdminController extends Controller
 
 
     public function AuthLogin(){
-        $admin_id = session()->get('admin_id'); //có admin_id login
+        $admin_id = Auth::id(); //có admin_id login
         if($admin_id){
             return Redirect::to('dashboard');
         } else{

@@ -11,11 +11,11 @@
         </div>
         @if(Session::has('message'))
             <div class="alert alert-success">
-                {{ Session::get('message') }}
+                {!! Session::get('message') !!}
             </div>
         @elseif(Session::has('error'))
             <div class="alert alert-danger">
-                {{ Session::get('error') }}
+                {!! Session::get('error') !!}
             </div>
         @endif
         <div class="table-responsive cart_info">
@@ -27,6 +27,7 @@
                         <td class="image">Hình ảnh</td>
                         <td class="description">Tên sản phẩm</td>
                         <td class="price">Giá sản phẩm</td>
+                        <td class="price">Số lượng còn lại</td>
                         <td class="quantity">Số lượng</td>
                         <td class="total">Thành tiền</td>
                         <td></td>
@@ -53,6 +54,10 @@
                         <td class="cart_price">
                             <p>{{number_format($cart['product_price'],0,',','.')}}<sup>đ</sup></p>
                         </td>
+                        <td class="cart_description">
+                            <h4><a href=""></a></h4>
+                            <p>{{$cart['product_quantity']}}</p>
+                        </td>
                         <td class="cart_quantity">
                             <div class="cart_quantity_button">
                                 
@@ -72,7 +77,7 @@
                     @endforeach
                     <tr>
                         <td>
-                            <input type="submit" value="Update" name="qty_update" class="btn btn-default btn-sm check_out">
+                            <input type="submit" value="Cập nhật" name="qty_update" class="btn btn-default btn-sm check_out">
                         </td>
                         <td>
                             <a class="btn btn-default check_out" href="{{url('/delete-all-product')}}">Xóa tất cả</a>

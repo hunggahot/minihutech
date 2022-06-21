@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryProduct;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BrandProduct;
@@ -139,3 +140,11 @@ Route::get('/active-slide/{slide_id}', [SliderController::class, 'active_slide']
 Route::get('/unactive-slide/{slide_id}', [SliderController::class, 'unactive_slide']);
 
 Route::post('/insert-slider', [SliderController::class, 'insert_slider']);
+
+//authentication roles
+Route::get('/register-auth', [AuthController::class, 'register_auth']);
+Route::get('/login-auth', [AuthController::class, 'login_auth']);
+Route::get('/logout-auth', [AuthController::class, 'logout_auth']);
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
