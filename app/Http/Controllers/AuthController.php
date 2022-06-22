@@ -27,7 +27,7 @@ class AuthController extends Controller
     public function login(Request $request){
         $this->validate($request, [
             'admin_email' => 'required|email|max:255',
-            'admin_password' => 'required|min:8|max:32',
+            'admin_password' => 'required|min:4|max:32',
         ]);
         // $data = $request->all();
         if(Auth::attempt(['admin_email' => $request->admin_email, 'admin_password' => $request->admin_password])){
@@ -55,7 +55,7 @@ class AuthController extends Controller
             'admin_name' => 'required|max:255',
             'admin_phone' => 'required|max:255',
             'admin_email' => 'required|email|max:255',
-            'admin_password' => 'required|min:8|max:32',
+            'admin_password' => 'required|min:4|max:32',
         ]);
     }
 }

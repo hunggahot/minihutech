@@ -17,12 +17,14 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Shipping;
 use App\Models\Slider;
+use Illuminate\Support\Facades\Auth;
+
 session_start();
 
 class CheckoutController extends Controller
 {
     public function AuthLogin(){
-        $admin_id = Session::get('admin_id'); //có admin_id login
+        $admin_id = Auth::id(); //có admin_id login
         if($admin_id){
             return Redirect::to('dashboard');
         } else{

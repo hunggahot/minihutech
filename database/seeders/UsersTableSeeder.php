@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Admin;
 use App\Models\Roles;
-
+use Illuminate\Support\Facades\DB;
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         Admin::truncate();
+        DB::table('admin_roles')->truncate();
 
         $adminRoles = Roles::where('name', 'admin')->first();
         $modRoles = Roles::where('name', 'mod')->first();
@@ -41,5 +42,11 @@ class UsersTableSeeder extends Seeder
             'admin_phone' => '03040120213',
             'admin_password' => md5('123456')
         ]);
+
+        $admin->roles()->attach($adminRoles);
+        $mod->roles()->attach($modRoles);
+        $user->roles()->attach($userRoles);
+
+        // \App\Models\Admin::factory()->count(10)->create();
     }
 }

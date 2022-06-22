@@ -14,6 +14,8 @@ use App\Exports\ExcelExports;
 
 use App\Models\Slider;
 use App\Models\CategoryProductModels;
+use Illuminate\Support\Facades\Auth;
+
 session_start();
 
 class CategoryProduct extends Controller
@@ -21,7 +23,7 @@ class CategoryProduct extends Controller
 
     //Admin Controller
     public function AuthLogin(){
-        $admin_id = Session::get('admin_id'); //có admin_id login
+        $admin_id = Auth::id(); //có admin_id login
         if($admin_id){
             return Redirect::to('dashboard');
         } else{
@@ -31,13 +33,15 @@ class CategoryProduct extends Controller
 
     public function add_category_product(){
         $this->AuthLogin();
-        return view('admin.add_category_product');
+        $category = CategoryProductModels::where('category_parent', 0)->orderBy('category_id', 'desc')->get();
+        return view('admin.add_category_product')->with(compact('category'));
     }
 
     public function all_category_product(){
         $this->AuthLogin();
-        $all_category_product = DB::table('tbl_category_product')->get();
-        $manager_category_product = view('admin.all_category_product')->with('all_category_product', $all_category_product);
+        $category_product = CategoryProductModels::where('category_parent', 0)->orderBy('category_id', 'desc')->get();
+        $all_category_product = DB::table('tbl_category_product')->paginate(10);
+        $manager_category_product = view('admin.all_category_product')->with('all_category_product', $all_category_product)->with('category_product', $category_product);
         return view('admin_layout')->with('admin.all_category_product', $manager_category_product); //admin layout chưa cả all category product gán vào biến manager
     }
 
@@ -48,6 +52,7 @@ class CategoryProduct extends Controller
         $data['category_slug'] = $request->category_slug;
         $data['meta_keywords'] = $request->category_product_keywords;
         $data['category_des'] = $request->category_product_des;
+        $data['category_parent'] = $request->category_parent;
         $data['category_status'] = $request->category_product_status;
 
         DB::table('tbl_category_product')->insert($data);

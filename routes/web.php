@@ -12,6 +12,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 //main
@@ -51,8 +52,10 @@ Route::post('/update-brand-product/{brand_product_id}', [BrandProduct::class, 'u
 Route::post('/save-brand-product', [BrandProduct::class, 'save_brand_product']);
 
 //product
-Route::get('/add-product', [Product::class, 'add_product']);
-Route::get('/edit-product/{product_id}', [Product::class, 'edit_product']);
+Route::group([ 'middleware' => 'auth.roles'], function(){
+    Route::get('/add-product', [Product::class, 'add_product']);
+    Route::get('/edit-product/{product_id}', [Product::class, 'edit_product']);
+});
 Route::get('/delete-product/{product_id}', [Product::class, 'delete_product']);
 Route::get('/all-product', [Product::class, 'all_product']);
 
@@ -148,3 +151,15 @@ Route::get('/logout-auth', [AuthController::class, 'logout_auth']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+//user
+Route::get('users', [UserController::class, 'index'])->middleware('auth.roles');
+Route::get('add-users', [UserController::class, 'add_users'])->middleware('auth.roles');
+Route::get('impersonate/{admin_id}', [UserController::class, 'impersonate']);
+Route::get('impersonate-destroy', [UserController::class, 'impersonate_destroy']);
+Route::get('delete-user-roles/{admin_id}', [UserController::class, 'delete_user_roles'])->middleware('auth.roles');
+
+Route::post('store-users', [UserController::class, 'store_users']);
+Route::post('assign-roles', [UserController::class, 'assign_roles'])->middleware('auth.roles');
+
+

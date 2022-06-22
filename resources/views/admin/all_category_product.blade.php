@@ -18,6 +18,7 @@
             <tr>
               <th>STT</th>
               <th>Tên danh mục</th>
+              <th>Thuộc danh mục</th>
               <th>Slug danh mục</th>
               <th>Trạng thái danh mục</th>
             </tr>
@@ -33,6 +34,17 @@
             <tr>
               <td><i>{{$i}}</i></td>
               <td>{{ $cate_pro -> category_name }}</td>
+              <td>
+                @if($cate_pro->category_parent == 0)
+                  Danh mục <span style="color: red; font-weight: 700">CHÍNH</span>
+                @else
+                 @foreach($category_product as $key => $val)
+                  @if($val->category_id==$cate_pro->category_parent)
+                  Danh mục <span style="color: green; font-weight: 700">CON</span> ({{$val->category_name}})
+                  @endif
+                 @endforeach
+                @endif
+              </td>
               <td>{{ $cate_pro -> category_slug }}</td>
               <td><span class="text-ellipsis">
                 <?php

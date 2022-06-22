@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Models\Brand;
 use App\Models\Slider;
+use Illuminate\Support\Facades\Auth;
+
 session_start();
 
 class BrandProduct extends Controller
 {
     //Admin Controller
     public function AuthLogin(){
-        $admin_id = Session::get('admin_id'); //có admin_id login
+        $admin_id = Auth::id(); //có admin_id login
         if($admin_id){
             return Redirect::to('dashboard');
         } else{
