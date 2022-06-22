@@ -161,12 +161,16 @@
                                 <li class="dropdown"><a href="#">Sản Phẩm<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         @foreach($category as $key => $cate1)
-                                        <li><a href="{{URL::to('/category-product/'.$cate1->category_slug)}}">{{$cate1->category_slug}}</a></li>
+                                        <li><a href="{{URL::to('/category-product/'.$cate1->category_slug)}}">{{$cate1->category_name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </li> 
                                 <li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
-                                    
+                                    <ul role="menu" class="sub-menu">
+                                        @foreach($category_post as $key => $cate_post)
+                                        <li><a href="{{URL::to('/category-post/'.$cate_post->cate_post_slug)}}">{{$cate_post->cate_post_name}}</a></li>
+                                        @endforeach
+                                    </ul>
                                 </li> 
                                 <li><a href="{{URL::to('/show-cart-ajax')}}">Giỏ Hàng</a></li>
                                 <li><a href="contact-us.html">Liên Hệ</a></li>
@@ -241,6 +245,7 @@
                             @foreach($category as $key => $cate)
                             <div class="panel panel-default">
 
+                                @if($cate->category_parent == 0)
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
 
@@ -254,13 +259,15 @@
                                 <div id="{{$cate->category_slug}}" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul>
-                                            <li><a href="#">123</a></li>
-                                            <li><a href="#">123</a></li>
-                                            <li><a href="#">123</a></li>
-                                            <li><a href="#">123</a></li>
+                                            @foreach($category as $key => $cate_sub)
+                                            @if($cate_sub->category_parent == $cate->category_id)
+                                            <li><a href="{{URL::to('/category-product/'.$cate_sub->category_slug)}}">{{$cate_sub->category_name}}</a></li>
+                                            @endif
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                             @endforeach
                         </div><!--/category-products-->
@@ -270,7 +277,7 @@
                             <div class="brands-name">
                                 <ul class="nav nav-pills nav-stacked">
                                     @foreach($brand as $key => $brand)
-                                    <li><a href="{{URL::to('/brand-product/'.$brand->brand_slug)}}"> <span class="pull-right">(50)</span>{{$brand->brand_name}}</a></li>
+                                    <li><a href="{{URL::to('/brand-product/'.$brand->brand_slug)}}"> <span class="pull-right"></span>{{$brand->brand_name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>

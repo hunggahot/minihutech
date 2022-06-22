@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests;
+use App\Models\CategoryPost;
 use App\Models\Slider;
 session_start();
 
@@ -20,6 +21,9 @@ class HomeController extends Controller
         $meta_title = "Siêu thị Mini HUTECH | Trang chủ";
         $meta_canonical = $request->url();
         //--Seo
+
+        //category post
+        $category_post = CategoryPost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
 
         //slider
         $slider = Slider::orderBy('slider_id','desc')->where('slider_status','1')->take(4)->get();
@@ -35,7 +39,7 @@ class HomeController extends Controller
 
         $all_product = DB::table('tbl_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(6); 
         
-        return view('pages.home')->with('category', $cate_product)->with('brand', $brand_product)->with('all_product', $all_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider); //gọi file home.blade.php từ folder pages
+        return view('pages.home')->with('category', $cate_product)->with('brand', $brand_product)->with('all_product', $all_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider)->with('category_post', $category_post); //gọi file home.blade.php từ folder pages
     }
 
     public function search(Request $request){
@@ -45,6 +49,8 @@ class HomeController extends Controller
         $meta_title = "Tìm kiếm sản phẩm";
         $meta_canonical = $request->url();
         //--Seo
+
+        $category_post = CategoryPost::orderBy('cate_post_id', 'desc')->get();
 
         //slider
         $slider = Slider::orderBy('slider_id','desc')->where('slider_status','1')->take(4)->get();
@@ -57,7 +63,7 @@ class HomeController extends Controller
         $search_product = DB::table('tbl_product')->where('product_name', 'like', '%'.$keywords.'%')->get();
 
 
-        return view('pages.product.search')->with('category', $cate_product)->with('brand', $brand_product)->with('search_product', $search_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider);
+        return view('pages.product.search')->with('category', $cate_product)->with('brand', $brand_product)->with('search_product', $search_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider)->with('category_post', $category_post);
     }
 
     public function send_mail(){

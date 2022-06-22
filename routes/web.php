@@ -7,10 +7,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BrandProduct;
 use App\Http\Controllers\Product;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryPostController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +40,23 @@ Route::post('/update-category-product/{category_product_id}', [CategoryProduct::
 Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
 Route::post('/export-csv', [CategoryProduct::class, 'export_csv']);
 Route::post('/import-csv', [CategoryProduct::class, 'import_csv']);
+
+//category post
+Route::get('/add-category-post', [CategoryPostController::class, 'add_category_post']);
+Route::get('/all-category-post', [CategoryPostController::class, 'all_category_post']);
+Route::get('/edit-category-post/{category_post_id}', [CategoryPostController::class, 'edit_category_post']);
+Route::get('/category-post/{cate_post_slug}', [CategoryPostController::class, 'category_post']);
+Route::get('/delete-category-post/{cate_id}', [CategoryPostController::class, 'delete_category_post']);
+
+Route::post('/save-category-post', [CategoryPostController::class, 'save_category_post']);
+Route::post('/update-category-post/{cate_id}', [CategoryPostController::class, 'update_category_post']);
+
+//post
+Route::get('/add-post', [PostController::class, 'add_post']);
+Route::get('/all-post', [PostController::class, 'all_post']);
+Route::get('/delete-post/{post_id}', [PostController::class, 'delete_post']);
+
+Route::post('/save-post', [PostController::class, 'save_post']);
 
 //brand product
 Route::get('/add-brand-product', [BrandProduct::class, 'add_brand_product']);
