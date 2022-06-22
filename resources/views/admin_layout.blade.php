@@ -224,8 +224,83 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/ckeditor/ckeditor.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.79/jquery.form-validator.min.js" integrity="sha512-7+hQkXGIswtBWoGbyajZqqrC8sa3OYW+gJw5FzW/XzU/lq6kScphPSlj4AyJb91MjPkQc+mPQ3bZ90c/dcUO5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
+    $(document).ready(function(){
+        load_gallery();
+
+        function load_gallery(){
+            var pro_id = $('.pro_id').val();
+            var _token = $('input[name="_token"]').val();
+            // alert(pro_id);
+            $.ajax({
+                url:"{{url('/select-gallery')}}",
+                method: "POST",
+                data:{pro_id:pro_id, _token:_token},
+                success:function(data){
+                    $('#gallery_load').html(data);
+                }
+            });
+        }
+
+        $('#file').change(function(){
+            var error = '';
+            var files = $('#file')[0].files;
+
+            if(files.length > 5){
+                error+= '<p>Tối đa chỉ được 5 ảnh</p>';
+            } else if(files.length==''){
+                error+= '<p>Không được để trống ảnh</p>';
+            } else if(files.size > 2000000){
+                error+= '<p>File ảnh không được lớn hơn 2MB</p>';
+            }
+
+            if(error == ''){
+
+            }else{
+                $('#file').val('');
+                $('#error_gallery').html('<span class="text-danger">'+error+'</span>');
+                return false;
+            }
+
+        });
+
+        $(document).on('blur', '.edit_gal_name',function(){
+            var gal_id = $(this).data('gal_id');
+            var gal_text = $(this).text;
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url:"{{url('/update-gallery-name')}}",
+                method: "POST",
+                data:{gal_id:gal_id, gal_text:gal_text, _token:_token},
+                success:function(data){
+                    load_gallery();
+                    $('#error_gallery').html('<span class="text-danger">Cập nhật tên hình ảnh thành công</span>');
+                }
+            });
+            
+        });
+
+        $(document).on('click', '.delete_gallery',function(){
+            var gal_id = $(this).data('gal_id');
+            var _token = $('input[name="_token"]').val();
+            if(confirm("Bạn chắc chắn xóa hình ảnh này?")){
+                $.ajax({
+                    url:"{{url('/delete-gallery')}}",
+                    method: "POST",
+                    data:{gal_id:gal_id, _token:_token},
+                    success:function(data){
+                        load_gallery();
+                        $('#error_gallery').html('<span class="text-danger">Xóa hình ảnh thành công</span>');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
  
- function ChangeToSlug()
+    function ChangeToSlug()
      {
          var slug;
       

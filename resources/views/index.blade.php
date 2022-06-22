@@ -28,6 +28,9 @@
     <link href="{{asset('public/frontend/css/main.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
+    <link href="{{asset('public/frontend/css/lightgallery.min.css')}}" rel="stylesheet">
+    <link href="{{asset('public/frontend/css/lightslider.css')}}" rel="stylesheet">
+    <link href="{{asset('public/frontend/css/prettify.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -168,7 +171,7 @@
                                 <li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         @foreach($category_post as $key => $cate_post)
-                                        <li><a href="{{URL::to('/category-post/'.$cate_post->cate_post_slug)}}">{{$cate_post->cate_post_name}}</a></li>
+                                        <li><a href="{{URL::to('/hutech-category-post/'.$cate_post->cate_post_slug)}}">{{$cate_post->cate_post_name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </li> 
@@ -467,6 +470,28 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0" nonce="s3Xe7law"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
+    <script src="{{asset('public/frontend/js/lightgallery-all.min.js')}}"></script>
+    <script src="{{asset('public/frontend/js/lightslider.js')}}"></script>
+    <script src="{{asset('public/frontend/js/prettify.js')}}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#imageGallery').lightSlider({
+                gallery:true,
+                item:1,
+                loop:true,
+                thumbItem:4,
+                slideMargin:0,
+                enableDrag: false,
+                currentPagerPosition:'left',
+                onSliderLoad: function(el) {
+                    el.lightGallery({
+                        selector: '#imageGallery .lslide'
+                    });
+                }   
+            });  
+        });
+    </script>
 
     <script type="text/javascript">
 

@@ -42,7 +42,7 @@
               <td><img src="public/uploads/post/{{ $post -> post_image }}" height="100" width="100" alt=""></td>
               <td>{!! $post -> post_sum !!}</td>
               <td>{{ $post -> post_meta_keywords }}</td>
-              <td>{{ $post -> cate_post_id }}</td>
+              <td>{{ $post -> cate_post -> cate_post_name }}</td>
               <td>
                 @if($post -> post_status == 0)
                     Hiển thị

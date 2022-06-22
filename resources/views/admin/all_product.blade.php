@@ -22,6 +22,7 @@
               <th>Số lượng</th>
               <th>Giá sản phẩm</th>
               <th>Hình ảnh sản phẩm</th>
+              <th>Thư viện ảnh sản phẩm</th>
               <th>Danh Mục sản phẩm</th>
               <th>Thương hiệu sản phẩm</th>
               <th>Trạng thái sản phẩm</th>
@@ -43,6 +44,7 @@
               <td>{{ $pro -> product_quantity }}</td>
               <td>{{ $pro -> product_price }}</td>
               <td><img src="public/uploads/product/{{ $pro -> product_image }}" height="100" width="100" alt=""></td>
+              <td><a href="{{('add-gallery/'.$pro->product_id)}}">Thêm thư viện ảnh</a></td>
               <td>{{ $pro -> category_name }}</td>
               <td>{{ $pro -> brand_name }}</td>
               <td><span class="text-ellipsis">

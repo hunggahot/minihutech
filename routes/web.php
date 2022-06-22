@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryPostController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SliderController;
@@ -51,11 +52,17 @@ Route::get('/delete-category-post/{cate_id}', [CategoryPostController::class, 'd
 Route::post('/save-category-post', [CategoryPostController::class, 'save_category_post']);
 Route::post('/update-category-post/{cate_id}', [CategoryPostController::class, 'update_category_post']);
 
-//post
+//homepage post
+Route::get('/hutech-category-post/{post_slug}', [PostController::class, 'hutech_category_post']);
+Route::get('/post/{post_slug}', [PostController::class, 'post']);
+
+//admin post
 Route::get('/add-post', [PostController::class, 'add_post']);
 Route::get('/all-post', [PostController::class, 'all_post']);
 Route::get('/delete-post/{post_id}', [PostController::class, 'delete_post']);
+Route::get('/edit-post/{post_id}', [PostController::class, 'edit_post']);
 
+Route::post('/update-post/{post_id}', [PostController::class, 'update_post']);
 Route::post('/save-post', [PostController::class, 'save_post']);
 
 //brand product
@@ -181,4 +188,11 @@ Route::get('delete-user-roles/{admin_id}', [UserController::class, 'delete_user_
 Route::post('store-users', [UserController::class, 'store_users']);
 Route::post('assign-roles', [UserController::class, 'assign_roles'])->middleware('auth.roles');
 
+//gallery
+Route::get('add-gallery/{product_id}', [GalleryController::class, 'add_gallery']);
+
+Route::post('select-gallery', [GalleryController::class, 'select_gallery']);
+Route::post('insert-gallery/{pro_id}', [GalleryController::class, 'insert_gallery']);
+Route::post('update-gallery-name', [GalleryController::class, 'update_gallery_name']);
+Route::post('delete-gallery', [GalleryController::class, 'delete_gallery']);
 

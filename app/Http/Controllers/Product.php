@@ -30,7 +30,7 @@ class Product extends Controller
         $all_product = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id', '=','tbl_product.category_id')
         ->join('tbl_brand','tbl_brand.brand_id', '=','tbl_product.brand_id')
-        ->orderBy('tbl_product.product_id', 'desc')->get();
+        ->orderBy('tbl_product.product_id', 'desc')->paginate(6);
         $manager_product = view('admin.all_product')->with('all_product', $all_product);
         
         return view('admin_layout')->with('admin.all_product', $manager_product); 
@@ -68,7 +68,7 @@ class Product extends Controller
             $data['product_image'] = $new_image;
             DB::table('tbl_product')->insert($data);
             Session::put('message', 'Thêm sản phẩm thành công');
-            return Redirect::to('all-product');
+            return Redirect::to('add-product');
         } 
             $data['product_image'] = '';        
             DB::table('tbl_product')->insert($data);
