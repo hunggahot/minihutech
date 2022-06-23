@@ -13,7 +13,7 @@
                 Session::put('message', null);
             }
         ?>
-        <table class="table table-striped b-t b-light">
+        <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
               <th>STT</th>
@@ -26,7 +26,7 @@
               <th>Danh Mục sản phẩm</th>
               <th>Thương hiệu sản phẩm</th>
               <th>Trạng thái sản phẩm</th>
-              
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -73,7 +73,7 @@
           </tbody>
         </table>
       </div>
-      <footer class="panel-footer">
+      {{-- <footer class="panel-footer">
         <div class="row">
             <div>
                 <div class="col-sm-7 text-right text-center-xs">
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </div> 
-      </footer>
+      </footer> --}}
     </div>
   </div>
 @endsection

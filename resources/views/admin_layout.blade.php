@@ -3,8 +3,10 @@
 <title>Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="csrf-token" content="{{csrf_token()}}">
 <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
 <link rel="stylesheet" href="{{asset('public/backend/css/bootstrap.min.css')}}" >
@@ -18,6 +20,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="{{asset('public/backend/css/font.css')}}" type="text/css"/>
 <link href="{{asset('public/backend/css/font-awesome.css')}}" rel="stylesheet"> 
 <link rel="stylesheet" href="{{asset('public/backend/css/morris.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{asset('public/backend/css/bootstrap-tagsinput.css')}}" type="text/css"/>
+<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" type="text/css"/>
 <!-- calendar -->
 <link rel="stylesheet" href="{{asset('public/backend/css/monthly.css')}}">
 <!-- //calendar -->
@@ -25,6 +29,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/js/jquery2.0.3.min.js')}}"></script>
 <script src="{{asset('public/backend/js/raphael-min.js')}}"></script>
 <script src="{{asset('public/backend/js/morris.js')}}"></script>
+<script src="{{asset('public/backend/js/bootstrap-tagsinput.min.js')}}"></script>
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
 <section id="container">
@@ -209,7 +215,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  <!-- footer -->
 		  <div class="footer">
 			<div class="wthree-copyright">
-			  <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+			  <p>© 2022 Siêu Thị Mini HUTECH</p>
 			</div>
 		  </div>
   <!-- / footer -->
@@ -263,9 +269,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         });
 
-        $(document).on('blur', '.edit_gal_name',function(){
+        $(document).on('blur', '.edit_gal_name', function(){
             var gal_id = $(this).data('gal_id');
-            var gal_text = $(this).text;
+            var gal_text = $(this).text();
             var _token = $('input[name="_token"]').val();
 
             $.ajax({
@@ -294,6 +300,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     }
                 });
             }
+        });
+
+        $(document).on('change', '.file_image',function(){
+            var gal_id = $(this).data('gal_id');
+            var image = document.getElementById('file-'+gal_id).files[0];
+            var _token = $('input[name="_token"]').val();
+
+            var form_data = new FormData()
+
+            form_data.append("file", document.getElementById('file-'+gal_id).files[0]);
+            form_data.append("gal_id", gal_id);
+
+                $.ajax({
+                    url:"{{url('/update-gallery')}}",
+                    method: "POST",
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:form_data,
+
+                    contentType:false,
+                    cache:false,
+                    processData:false,
+                    success:function(data){
+                        load_gallery();
+                        $('#error_gallery').html('<span class="text-danger">Cập nhật hình ảnh thành công</span>');
+                    }
+                });
+            
         });
     });
 </script>
@@ -483,9 +518,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready( function () {
         $('#myTable').DataTable();
-    });
+    } );
 </script>
 
 <script type="text/javascript">

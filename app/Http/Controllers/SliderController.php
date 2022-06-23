@@ -65,11 +65,25 @@ class SliderController extends Controller
             $slider->slider_des = $data['slider_des'];
            	$slider->save();
             Session::put('message','Thêm slider thành công');
-            return Redirect::to('manage-slider');
+            return Redirect::to('add-slider');
         }else{
         	Session::put('message','Làm ơn thêm hình ảnh');
     		return Redirect::to('add-slider');
         }
        	
+    }
+
+    public function delete_slide($slider_id){
+        $this->AuthLogin();
+        $slider = Slider::find($slider_id);
+        $slider_image = $slider->slider_image;
+        if($slider_image){
+            $path = 'public/uploads/slider/'.$slider_image;
+            unlink($path);
+        }
+        $slider->delete();
+
+        Session::put('message', 'Xóa Slider thành công');
+        return redirect()->back();
     }
 }

@@ -27,6 +27,7 @@ Route::post('/search', [HomeController::class, 'search']);
 Route::get('/category-product/{category_slug}', [CategoryProduct::class, 'show_category_home']); 
 Route::get('/brand-product/{brand_slug}', [BrandProduct::class, 'show_brand_home']); 
 Route::get('/product-details/{product_slug}', [Product::class, 'product_details']); 
+Route::get('/tag/{product_tag}', [Product::class, 'tag']); 
 
 //category product
 Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product']);
@@ -167,6 +168,7 @@ Route::get('/add-slider', [SliderController::class, 'add_slider']);
 
 Route::get('/active-slide/{slide_id}', [SliderController::class, 'active_slide']);
 Route::get('/unactive-slide/{slide_id}', [SliderController::class, 'unactive_slide']);
+Route::get('/delete-slide/{slider_id}', [SliderController::class, 'delete_slide']);
 
 Route::post('/insert-slider', [SliderController::class, 'insert_slider']);
 
@@ -195,4 +197,5 @@ Route::post('select-gallery', [GalleryController::class, 'select_gallery']);
 Route::post('insert-gallery/{pro_id}', [GalleryController::class, 'insert_gallery']);
 Route::post('update-gallery-name', [GalleryController::class, 'update_gallery_name']);
 Route::post('delete-gallery', [GalleryController::class, 'delete_gallery']);
+Route::post('update-gallery', [GalleryController::class, 'update_gallery']);
 

@@ -27,7 +27,7 @@ class DeliveryController extends Controller
         $feeship = FeeShip::orderBy('fee_id', 'desc')->get();
         $output = '';
         $output .= '<div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="myTable">
                 <thread>
                     <tr>
                         <th>Tên thành phố</th>

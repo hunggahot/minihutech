@@ -35,7 +35,7 @@ class BrandProduct extends Controller
         $this->AuthLogin();
 
         // $all_brand_product = DB::table('tbl_brand')->get(); static mô hình hướng đối tượng
-        $all_brand_product = Brand::orderBy('brand_id', 'desc')->paginate(5);
+        $all_brand_product = Brand::orderBy('brand_id', 'desc')->get();
         $manager_brand_product = view('admin.all_brand_product')->with('all_brand_product', $all_brand_product);
         return view('admin_layout')->with('admin.all_brand_product', $manager_brand_product); //admin layout chưa cả all brand product gán vào biến manager
     }

@@ -34,15 +34,10 @@
                                 Session::put('message',null);
                             }
                             ?>
-      <table class="table table-striped b-t b-light">
+      <table class="table table-striped b-t b-light" id="myTable">
         <thead>
           <tr>
-            <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
-            </th>
-          
+            
             <th>Tên user</th>
             <th>Email</th>
             <th>Phone</th>
@@ -50,8 +45,8 @@
             <th>Admin</th>
             <th>Mod</th>
             <th>User</th>
+            <th></th>
             
-            <th style="width:30px;"></th>
           </tr>
         </thead>
         <tbody>
@@ -60,7 +55,7 @@
               @csrf
               <tr>
                
-                <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+                
                 <td>{{ $user->admin_name }}</td>
                 <td>
                     {{ $user->admin_email }} 
@@ -89,7 +84,7 @@
         </tbody>
       </table>
     </div>
-    <footer class="panel-footer">
+    {{-- <footer class="panel-footer">
       <div class="row">
         
         <div class="col-sm-5 text-center">
@@ -101,7 +96,7 @@
           </ul>
         </div>
       </div>
-    </footer>
+    </footer> --}}
   </div>
 </div>
 @endsection

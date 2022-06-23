@@ -7,7 +7,7 @@
     <style type="text/css">
         .lSSlideOuter .lSPager.lSGallery img{
             display: block;
-            height: 100px;
+            height: 80px;
             max-width: 100%;
         }
 
@@ -18,13 +18,11 @@
 
     <div class="col-sm-5">
         <ul id="imageGallery">
-            <li data-thumb="{{asset('public/frontend/images/product-details/similar1.jpg')}}" data-src="{{asset('public/frontend/images/product-details/similar1.jpg')}}">
-              <img width="100%" src="{{asset('public/frontend/images/product-details/similar1.jpg')}}" />
+            @foreach($gallery as $key => $gal)
+            <li data-thumb="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" data-src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}">
+              <img width="100%" alt="{{$gal->gallery_image}}" src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" />
             </li>
-            <li data-thumb="{{asset('public/frontend/images/product-details/similar1.jpg')}}" data-src="{{asset('public/frontend/images/product-details/similar1.jpg')}}">
-                <img width="100%" src="{{asset('public/frontend/images/product-details/similar1.jpg')}}" />
-            </li>
-            
+            @endforeach
         </ul>
     </div>
     <div class="col-sm-7">
@@ -42,7 +40,7 @@
                 <input type="hidden" value="{{$value->product_price}}" class="cart_product_price_{{$value->product_id}}">
                         
             <span>
-                <span>{{number_format($value->product_price,0,',','.')}}<sup></sup></span>
+                <span>{{number_format($value->product_price,0,',','.')}}<sup>đ</sup></span>
             
                 <label>Số lượng: </label>
                 <input name="qty" type="number" min="1" class="cart_product_qty_{{$value->product_id}}"  value="1" />
@@ -54,6 +52,32 @@
             <p><b>Điều kiện:</b> Mới</p>
             <p><b>Danh Mục:</b> {{$value->category_name}}</p>
             <p><b>Thương Hiệu:</b> {{$value->brand_name}}</p>
+            <style type="text/css">
+                a.tags_style {
+                    margin: 3px 2px;
+                    border: 1px solid;
+                    border-radius: 5px;
+                    height: auto;
+                    background: #428bca;
+                    color: #ffff;
+                    padding: 3px;
+                }
+                a.tags_style:hover {
+                    background: black;
+                }
+            </style>
+            <fieldset>
+                <legend>Tags</legend>
+                <p><i class="fa fa-tag"></i>
+                @php
+                    $tags = $value->product_tags;
+                    $tags = explode(",", $tags);
+                @endphp
+                    @foreach($tags as $tag)
+                        <a href="{{url('/tag/'.str_slug($tag))}}" class="tags_style">{{$tag}}</a>
+                    @endforeach
+                </p>
+            </fieldset>
             <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
         </div><!--/product-information-->
     </div>

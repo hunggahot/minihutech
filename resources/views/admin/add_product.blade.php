@@ -62,6 +62,10 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Tags sản phẩm</label>
+                            <input type="text" name="product_tags" data-role="tagsinput" class="form-control" >
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Hiển thị</label>
                             <select name="product_status" class="form-control input-sm m-bot15">
                                 <option value="0">Hiển thị</option>

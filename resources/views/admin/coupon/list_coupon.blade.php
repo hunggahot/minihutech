@@ -14,7 +14,7 @@
                 Session::put('message', null);
             }
         ?>
-        <table class="table table-striped b-t b-light">
+        <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
               
@@ -23,6 +23,7 @@
               <th>Số lượng mã</th>
               <th>Trạng thái</th>
               <th>Số giảm</th>
+              <th></th>
               
             </tr>
           </thead>
