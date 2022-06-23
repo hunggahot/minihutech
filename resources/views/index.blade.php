@@ -176,18 +176,17 @@
                                     </ul>
                                 </li> 
                                 <li><a href="{{URL::to('/show-cart-ajax')}}">Giỏ Hàng</a></li>
-                                <li><a href="contact-us.html">Liên Hệ</a></li>
+                                <li><a href="{{URL::to('/contact')}}">Liên Hệ</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-5">
-                        <form action="{{URL::to('/search')}}" method="POST">
+                        <form action="{{URL::to('/search')}}" autocomplete="off" method="POST">
                             {{ csrf_field() }}
-                            <div class="input group">
-                                <input style="height: 28px;
-                                border-top-left-radius: 5px;
-                                border-bottom-left-radius: 5px;" type="text" name="keywords_submit" placeholder="Tìm kiếm sản phẩm"/>
-                                <input style="margin-top: -3px; color:#666" type="submit" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm">
+                            <div class="search_box">
+                                <input type="text" style="width:100%" name="keywords_submit" id="keywords" placeholder="Tìm kiếm sản phẩm"/>
+                                <div id="search_ajax"></div>
+                                <input style="margin-top: 0; color:#666" type="submit" name="search_items" class="btn btn-primary btn-sm" value="Tìm kiếm">
                             </div>
                         </form>
                     </div>
@@ -473,6 +472,118 @@
     <script src="{{asset('public/frontend/js/lightgallery-all.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/lightslider.js')}}"></script>
     <script src="{{asset('public/frontend/js/prettify.js')}}"></script>
+    
+    <script type="text/javascript">
+        function remove_background(product_id){
+            for(var count = 1; count <= 5; count++){
+                $('#'+product_id+'-'+count).css('color', '#ccc');
+            }
+        }
+
+        //hover đánh giá sao
+        $(document).on('mouseenter', '.rating', function(){
+            var index = $(this).data("index");
+            var product_id = $(this).data('product_id');
+
+            remove_background(product_id);
+
+            for(var count = 1; count<=index; count++){
+                $('#'+product_id+'-'+count).css('color', '#ffcc00');
+            }
+        });
+
+        //nhả hover không đánh giá sao
+        $(document).on('mouseleave', '.rating', function(){
+            var index = $(this).data("index");
+            var product_id = $(this).data('product_id');
+            var rating = $(this).data("rating");
+
+            remove_background(product_id);
+
+            for(var count = 1; count <= rating; count++){
+                $('#'+product_id+'-'+count).css('color', '#ffcc00');
+            }
+        });
+
+        //click đánh giá sao
+        $(document).on('click', '.rating', function(){
+            var index = $(this).data("index");
+            var product_id = $(this).data('product_id');
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                    url: '{{url('insert-rating')}}',
+                    method: "POST",
+                    data:{index:index, product_id:product_id, _token:_token},
+                    success:function(data){
+                        if(data == 'done'){
+                            alert("Bạn đã đánh giá "+index+" sao trên 5 sao");
+                        } else{
+                            alert("Lỗi đánh giá");
+                        }
+                    }
+                });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            load_comment();
+            function load_comment(){
+                var product_id = $('.comment_product_id').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: '{{url('/load-comment')}}',
+                    method: "POST",
+                    data:{product_id:product_id, _token:_token},
+                    success:function(data){
+                        $('#comment_show').html(data);
+                    }
+                });
+            }
+            $('.send-comment').click(function(){
+                var product_id = $('.comment_product_id').val();
+                var comment_name = $('.comment_name').val();
+                var comment_content= $('.comment_content').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: '{{url('/send-comment')}}',
+                    method: "POST",
+                    data:{product_id:product_id, _token:_token, comment_name:comment_name, comment_content:comment_content},
+                    success:function(data){
+                        $('#notify_comment').html('<p class="text text-success">Thêm bình luận thành công, bình luận đang được chờ duyệt</p>')
+                        load_comment();
+                        $('#notify_comment').fadeOut(10000);
+                        $('.comment_name').val('');
+                        $('.comment_content').val('');
+                    }
+                });
+            })
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('#keywords').keyup(function(){
+            var query = $(this).val();
+            if(query != ''){
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: '{{url('/autocomplete-ajax')}}',
+                    method: "POST",
+                    data:{query:query, _token:_token},
+                    success:function(data){
+                        $('#search_ajax').fadeIn();
+                        $('#search_ajax').html(data);
+                    }
+                });
+            }else{
+                $('#search_ajax').fadeOut();
+            }
+        });
+        $(document).on('click', 'li_search_ajax', function(){
+            $('#keywords').val($(this).text());
+            $('#search_ajax').fadeOut();
+        });
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function() {

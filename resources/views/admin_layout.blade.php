@@ -181,6 +181,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                       
                     </ul>
                 </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Bình luận</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{URL::to('/comment')}}">Liệt kê bình luận</a></li>
+                      
+                    </ul>
+                </li>
                 @impersonate()
                 <li>
                         <span><a href="{{URL::to('/impersonate-destroy')}}">Ngưng chuyển quyền</a></span>
@@ -201,7 +211,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </li>
                 @endhasrole
                
-            </ul>            </div>
+            </ul>            
+        </div>
         <!-- sidebar menu end-->
     </div>
 </aside>
@@ -229,6 +240,71 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
 <script src="{{asset('public/backend/ckeditor/ckeditor.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.79/jquery.form-validator.min.js" integrity="sha512-7+hQkXGIswtBWoGbyajZqqrC8sa3OYW+gJw5FzW/XzU/lq6kScphPSlj4AyJb91MjPkQc+mPQ3bZ90c/dcUO5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#category_order').sortable({
+            placeholder: 'ui-state-highlight',
+            update: function(event, ui){
+                var page_id_array = new Array();
+                var _token = $('input[name="_token"]').val();
+                $('#category_order tr').each(function(){
+                    page_id_array.push($(this).attr("id"));
+                });
+
+                $.ajax({
+                url:"{{url('/arrange-category')}}",
+                method: "POST",
+                data:{page_id_array:page_id_array, _token:_token},
+                success:function(data){
+                   alert(data);
+                }
+            });
+            } 
+        });
+    });
+</script>    
+<script type="text/javascript">
+    $('.comment_accept_btn').click(function(){
+        var comment_status = $(this).data('comment_status');
+        var comment_id = $(this).data('comment_id');
+        var comment_product_id = $(this).attr('id');
+        if(comment_status == 0){
+            var alert = 'Duyệt thành công';
+        }else{
+            var alert = 'Hủy duyệt thành công';
+        }
+        $.ajax({
+            url:"{{url('/allow-comment')}}",
+            method: "POST",
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:{comment_status:comment_status, comment_id:comment_id, comment_product_id:comment_product_id},
+            success:function(data){
+                $('#notify_comment').html('<span class="text text-alert">'+alert+'</span>');
+            }
+        });
+    });
+    $('.btn-reply-comment').click(function(){
+        var comment_id = $(this).data('comment_id');
+        var comment = $('.reply_comment_'+comment_id).val();
+        var comment_product_id = $(this).data('product_id');
+        
+        $.ajax({
+            url:"{{url('/reply-comment')}}",
+            method: "POST",
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:{comment:comment, comment_id:comment_id, comment_product_id:comment_product_id},
+            success:function(data){
+                $('.reply_comment'+comment_id).val('');
+                $('#notify_comment').html('<span class="text text-alert">Trả lời bình luận thành công</span>');
+            }
+        });
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function(){
         load_gallery();
@@ -370,7 +446,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 
-</script>
+</>
 <script type="text/javascript">
     $('.update_quantity_order').click(function(){
         var order_product_id = $(this).data('product_id');

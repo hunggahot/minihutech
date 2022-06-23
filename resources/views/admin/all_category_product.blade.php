@@ -24,7 +24,16 @@
               <th></th>
             </tr>
           </thead>
-          <tbody>
+          <style type="text/css">
+              #category_order .ui-state-highlight{
+                padding:24px;
+                background-color: #ffffcc;
+                border: 1px dotted #ccc;
+                cursor: move;
+                margin-top: 12px
+              }
+          </style>
+          <tbody id="category_order">
             @php
                 $i = 0;
             @endphp
@@ -32,7 +41,7 @@
             @php
                 $i++;
             @endphp
-            <tr>
+            <tr id="{{$cate_pro->category_id}}">
               <td><i>{{$i}}</i></td>
               <td>{{ $cate_pro -> category_name }}</td>
               <td>

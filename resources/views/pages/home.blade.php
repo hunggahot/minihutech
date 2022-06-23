@@ -4,6 +4,52 @@
 @section('content')
 
 <div class="features_items"><!--features_items-->
+    <div class="category-tab"><!--category-tab-->
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs">
+
+                <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
+                
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tshirt" >
+                <div class="col-sm-3">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img src="images/home/gallery1.jpg" alt="" />
+                                <h2>$56</h2>
+                                <p>Easy Polo Black Edition</p>
+                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div><!--/category-tab-->
+    {{-- </div><!--/category-tab-->
+    <div class="category-tab">
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs">
+                @php
+                    $i = 0;
+                @endphp
+                @foreach ($cate_pro_tabs as $key => $cat_tabs)
+                    @php
+                        $i++;
+                    @endphp
+                    <li data-id="{{$cat_tabs->category_id}}" id="{{$i==1 ? 'tabs_id' : ''}}" class="{{$i==1 ? 'active' : ''}} tabs_pro">
+                        <a href="#{{$cat_tabs->slug_category_product}}" data-toggle="tab">{{$cat_tabs->category_name}}</a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+        <div id="tabs_product"></div>
+    </div> --}}
     <h2 class="title text-center">Hàng mới về</h2>
     @foreach($all_product as $key => $product)
     <div class="col-sm-4">

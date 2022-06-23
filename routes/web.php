@@ -9,6 +9,7 @@ use App\Http\Controllers\Product;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryPostController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\GalleryController;
@@ -21,13 +22,29 @@ use Illuminate\Support\Facades\Route;
 //main
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/homepage', [HomeController::class, 'index']); // gọi hàm index từ controller ra trang chủ
+
 Route::post('/search', [HomeController::class, 'search']); 
+Route::post('/autocomplete-ajax', [HomeController::class, 'autocomplete_ajax']); 
+
+//contact
+Route::get('/contact', [ContactController::class, 'contact']); 
 
 //homepage category product
 Route::get('/category-product/{category_slug}', [CategoryProduct::class, 'show_category_home']); 
 Route::get('/brand-product/{brand_slug}', [BrandProduct::class, 'show_brand_home']); 
 Route::get('/product-details/{product_slug}', [Product::class, 'product_details']); 
 Route::get('/tag/{product_tag}', [Product::class, 'tag']); 
+
+//comment
+Route::get('/comment', [Product::class, 'list_comment']); 
+
+Route::post('/load-comment', [Product::class, 'load_comment']); 
+Route::post('/send-comment', [Product::class, 'send_comment']); 
+Route::post('/allow-comment', [Product::class, 'allow_comment']); 
+Route::post('/reply-comment', [Product::class, 'reply_comment']); 
+
+//rating
+Route::post('/insert-rating', [Product::class, 'insert_rating']); 
 
 //category product
 Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product']);
@@ -40,6 +57,7 @@ Route::get('/active-category-product/{category_product_id}', [CategoryProduct::c
 
 Route::post('/update-category-product/{category_product_id}', [CategoryProduct::class, 'update_category_product']);
 Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
+Route::post('/arrange-category', [CategoryProduct::class, 'arrange_category']);
 Route::post('/export-csv', [CategoryProduct::class, 'export_csv']);
 Route::post('/import-csv', [CategoryProduct::class, 'import_csv']);
 
