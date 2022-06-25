@@ -6,6 +6,8 @@
         Liệt kê mã giảm giá
       </div>
       
+      <p><a href="{{url('/send-coupon')}}" class="btn btn-default">Gửi mã giảm giá cho khách vip</a></p>
+
       <div class="table-responsive">
         <?php
             $message = Session::get('message');

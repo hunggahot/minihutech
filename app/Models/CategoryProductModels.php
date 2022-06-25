@@ -17,4 +17,8 @@ class CategoryProductModels extends Model
     public function post(){
         $this->hasMany('App\Models\Post');
     }
+
+    public function product(){
+        return $this->hasMany('App\Models\Product');
+    }
 }

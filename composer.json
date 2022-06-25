@@ -16,7 +16,8 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
-        "rackspace/php-opencloud": "dev-master"
+        "rackspace/php-opencloud": "dev-master",
+        "srmklive/paypal": "~3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

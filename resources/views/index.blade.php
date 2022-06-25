@@ -293,6 +293,7 @@
                 <div class="col-sm-9 padding-right">
                     @yield('content') 
                          {{-- gọi file từ đây --}}
+                         
                     
                 </div>
             </div>
@@ -473,6 +474,88 @@
     <script src="{{asset('public/frontend/js/lightslider.js')}}"></script>
     <script src="{{asset('public/frontend/js/prettify.js')}}"></script>
     
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        paypal.Button.render({
+            // Configure environment
+            env: 'sandbox',
+
+            client: {
+            sandbox: 'AfZnHo8XPiaAIpU4GVXCtk0CVmP64mgLzue1Ctnr-vOQKXxMvSwToNyge2bUKfsLJpLqviRAuOqjMFlb',
+            production: 'demo_production_client_id'
+            },
+            // Customize button (optional)
+            locale: 'en_US',
+            style: {
+            size: 'small',
+            color: 'gold',
+            shape: 'pill',
+            },
+
+            // Enable Pay Now checkout flow (optional)
+            commit: true,
+
+            // Set up a payment
+            payment: function(data, actions) {
+            return actions.payment.create({
+                transactions: [{
+                amount: {
+                    total: '0.01',
+                    currency: 'USD'
+                }
+                }]
+            });
+            },
+            // Execute the payment
+            onAuthorize: function(data, actions) {
+            return actions.payment.execute().then(function() {
+                // Show a confirmation message to the buyer
+                window.alert('Cảm ơn bạn đã mua hàng của chúng tôi');
+            });
+            }
+        }, '#paypal-button');
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $('#sort').on('change', function(){
+                var url = $(this).val();
+                if(url){
+                    window.location = url;
+                }
+                return false;
+            });
+        });
+    </script>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var cate_id = $('.tabs_pro').data('id');
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                    url: '{{url('/product-tabs')}}',
+                    method: "POST",
+                    data:{cate_id:cate_id, _token:_token},
+                    success:function(data){
+                        $('#tabs_product').html(data);
+                    }
+                });
+        });
+
+        $('.tabs_pro').click(function(){
+            var cate_id = $(this).data('id');
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                    url: '{{url('/product-tabs')}}',
+                    method: "POST",
+                    data:{cate_id:cate_id, _token:_token},
+                    success:function(data){
+                        $('#tabs_product').html(data);
+                    }
+                });
+        })
+    </script>
     <script type="text/javascript">
         function remove_background(product_id){
             for(var count = 1; count <= 5; count++){

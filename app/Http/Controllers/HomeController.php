@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests;
 use App\Models\CategoryPost;
+use App\Models\CategoryProductModels;
 use App\Models\Product;
 use App\Models\Slider;
 session_start();
@@ -34,14 +35,11 @@ class HomeController extends Controller
 
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
 
-        // $all_product = DB::table('tbl_product')
-        // ->join('tbl_category_product','tbl_category_product.category_id', '=','tbl_product.category_id')
-        // ->join('tbl_brand','tbl_brand.brand_id', '=','tbl_product.brand_id')
-        // ->orderBy('tbl_product.product_id', 'desc')->get();
-
         $all_product = DB::table('tbl_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(6); 
+
+        $cate_pro_tabs =  CategoryProductModels::where('category_parent','<>', 0)->orderBy('category_order', 'asc')->get();
         
-        return view('pages.home')->with('category', $cate_product)->with('brand', $brand_product)->with('all_product', $all_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider)->with('category_post', $category_post); //gọi file home.blade.php từ folder pages
+        return view('pages.home')->with('category', $cate_product)->with('brand', $brand_product)->with('all_product', $all_product)->with('meta_des', $meta_des)->with('meta_keywords', $meta_keywords)->with('meta_title', $meta_title)->with('meta_canonical', $meta_canonical)->with('slider', $slider)->with('category_post', $category_post)->with('cate_pro_tabs', $cate_pro_tabs); //gọi file home.blade.php từ folder pages
     }
 
     public function search(Request $request){
@@ -83,16 +81,5 @@ class HomeController extends Controller
         }
     }
 
-    public function send_mail(){
-        $to_name = "Siêu Thị Mini HUTECH";
-        $to_email = "lamquochung03042001@gmail.com";
-
-        $data = array("name"=> "Mail từ tài khoản khách hàng", "body" => "Mail nói về vấn đề hàng hóa");
-
-        Mail::send('pages.send_mail', $data, function ($message) use($to_name, $to_email){
-            $message->from($to_email)->subject('Test lần đầu làm chuyện ấy');
-            $message->to($to_email, $to_name);
-        });
-        return redirect('/')->with('message', '');
-    }
+   
 }

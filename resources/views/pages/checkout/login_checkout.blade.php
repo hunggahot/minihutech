@@ -14,7 +14,10 @@
                             <input type="checkbox" class="checkbox"> 
                             Ghi nhớ lần đăng nhập này
                         </span>
-                        <button type="submit" class="btn btn-default">Login</button>
+                        <span>
+                            <a href="{{url('/forgot-password')}}">Quên mật khẩu</a>
+                        </span>
+                        <button type="submit" class="btn btn-default">Đăng Nhập</button>
                     </form>
                 </div><!--/login form-->
             </div>

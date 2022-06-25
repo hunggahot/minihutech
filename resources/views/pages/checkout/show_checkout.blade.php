@@ -141,6 +141,7 @@
                                     <td class="cart_delete">
                                         <a class="cart_quantity_delete" href="{{url('/delete-product-cart/'.$cart['session_id'])}}"><i class="fa fa-times"></i></a>
                                     </td>
+                                    
                                 </tr>
                                 @endforeach
                                 <tr>
@@ -216,7 +217,12 @@
                                                     echo number_format($total_after,0,',','.').'<sup>đ</sup>';
                                                 }
                                             @endphp
-                                            </li>
+                                            </li>   
+                                            <div class="col-md-12">
+                                                <div id="paypal-button"></div>
+                                            </div>
+                                            
+                                            
                                         </td>
                                     
                                 </tr>
@@ -232,12 +238,20 @@
                             </tbody>
                             </form>
                             @if(Session::get('cart'))
-                            <tr><td>
+                            <tr>
+                                <td>
                                     <form action="{{url('/check-coupon')}}" method="POST">
-                                        {{ csrf_field() }}
+                                        @csrf
                                         <input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
                                         <input type="submit" class="btn btn-default" name="check_coupon"  value="Tính mã giảm giá">
                                         
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{url('/momo-payment')}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="total-momo" value="{{$total_after}}">
+                                        <button type="submit" class="btn tbn-default check_out" name="payUrl">Thanh toán MOMO</button>
                                     </form>
                                 </td>
                             </tr>

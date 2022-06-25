@@ -13,11 +13,13 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 //main
 Route::get('/', [HomeController::class, 'index']);
@@ -57,7 +59,10 @@ Route::get('/active-category-product/{category_product_id}', [CategoryProduct::c
 
 Route::post('/update-category-product/{category_product_id}', [CategoryProduct::class, 'update_category_product']);
 Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
+
 Route::post('/arrange-category', [CategoryProduct::class, 'arrange_category']);
+Route::post('/product-tabs', [CategoryProduct::class, 'product_tabs']);
+
 Route::post('/export-csv', [CategoryProduct::class, 'export_csv']);
 Route::post('/import-csv', [CategoryProduct::class, 'import_csv']);
 
@@ -147,7 +152,13 @@ Route::post('/select-delivery-home', [CheckoutController::class, 'select_deliver
 Route::post('/calculate-fee', [CheckoutController::class, 'calculate_fee']);
 
 //send mail
-Route::get('/send-mail', [HomeController::class, 'send_mail']);
+Route::get('/send-mail', [MailController::class, 'send_mail']);
+Route::get('/send-coupon', [MailController::class, 'send_coupon']);
+
+//login user
+Route::get('/forgot-password', [MailController::class, 'forgot_password']);
+
+Route::post('/recover-password', [MailController::class, 'recover_password']);
 
 //login facebook
 Route::get('/login-facebook', [AdminController::class, 'login_facebook']);
@@ -217,3 +228,4 @@ Route::post('update-gallery-name', [GalleryController::class, 'update_gallery_na
 Route::post('delete-gallery', [GalleryController::class, 'delete_gallery']);
 Route::post('update-gallery', [GalleryController::class, 'update_gallery']);
 
+Route::post('/momo-payment', [CheckoutController::class, 'momo_payment']);
