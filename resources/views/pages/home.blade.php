@@ -1,6 +1,15 @@
 {{-- file chứa các dữ liệu được đẩy lên trang chủ --}}
 
 @extends('index')
+
+@section('slider')
+    @include('pages.include.slider')
+@endsection
+
+@section('sidebar')
+    @include('pages.include.sidebar')
+@endsection
+
 @section('content')
 
 <div class="features_items"><!--features_items-->
@@ -25,7 +34,7 @@
     </div>
     <h2 class="title text-center">Hàng mới về</h2>
     @foreach($all_product as $key => $product)
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div class="product-image-wrapper">
             <div class="single-products">
                     <div class="productinfo text-center">

@@ -53,7 +53,7 @@ class BrandProduct extends Controller
         $brand->save();
         
         session()->put('message', 'Thêm thương hiệu sản phẩm thành công');
-        return Redirect::to('all-brand-product');
+        return Redirect::to('add-brand-product');
     }
 
     public function unactive_brand_product($brand_product_id){

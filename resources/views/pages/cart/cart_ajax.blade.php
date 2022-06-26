@@ -5,9 +5,9 @@
     <div class="container">
         <div class="breadcrumbs">
             <ol class="breadcrumb">
-                <li><a href="{{URL::to('/')}}">Trang Chủ</a></li>
-                <li class="active">Giỏ hàng của bạn</li>
-            </ol>
+                <li class="breadcrumb-item"><a href="{{url('/')}}">Trang chủ</a></li>
+                <li class="breadcrumb-item">Giỏ hàng của bạn</li>
+              </ol>
         </div>
         @if(Session::has('message'))
             <div class="alert alert-success">

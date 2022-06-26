@@ -1,6 +1,10 @@
 @extends('index')
 @section('content')
 
+@section('sidebar')
+    @include('pages.include.sidebar')
+@endsection
+
 @foreach($product_details as $key => $value)
 <div class="product-details"><!--product-details-->
 
@@ -110,11 +114,6 @@
         
         <div class="tab-pane fade active in" id="reviews" >
             <div class="col-sm-12">
-                <ul>
-                    <li><a href=""><i class="fa fa-user"></i>Admin</a></li>
-                    <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-                    <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
-                </ul>
                 <style type="text/css">
                     .style_comment{
                         border: 1px solid #ddd;
@@ -150,7 +149,7 @@
                         <input style="width:100%; margin-left:0" type="text" class="comment_name" placeholder="Tên bình luận"/>
                     </span>
                     <textarea name="comment" class="comment_content" placeholder="Nội dung bình luận"></textarea>
-                    <b>Đánh giá: </b> <img src="images/product-details/rating.png" alt="" />
+                    
                     <button type="button" class="btn btn-default pull-right send-comment">
                         Gửi bình luận
                     </button>

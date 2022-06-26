@@ -39,8 +39,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="index.html" class="logo">
-        ADMIN
+    <a href="{{URL::to('/dashboard')}}" class="logo">
+        <img style="width: 75%" src="{{asset('public/frontend/images/hutech_banner.png')}}" alt="">
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
@@ -51,13 +51,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
-        <li>
-            <input type="text" class="form-control search" placeholder=" Search">
-        </li>
+        
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="{{('public/backend/images/2.png')}}">
+                <img alt="" src="{{asset('public/backend/images/2.png')}}">
                 <span class="username">
                     <?php
                         $name = Auth::user()->admin_name;

@@ -1,6 +1,15 @@
 {{-- file chứa các dữ liệu được đẩy lên trang chủ --}}
 
 @extends('index')
+
+@section('slider')
+    @include('pages.include.slider');
+@endsection
+
+@section('sidebar')
+    @include('pages.include.sidebar')
+@endsection
+
 @section('content')
 
 <div class="features_items"><!--features_items-->

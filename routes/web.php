@@ -158,7 +158,9 @@ Route::get('/send-coupon-vip', [MailController::class, 'send_coupon']);
 
 //login user
 Route::get('/forgot-password', [MailController::class, 'forgot_password']);
+Route::get('/update-new-pass', [MailController::class, 'update_new_pass']);
 
+Route::post('/reset-new-pass', [MailController::class, 'reset_new_pass']);
 Route::post('/recover-password', [MailController::class, 'recover_password']);
 
 //login facebook

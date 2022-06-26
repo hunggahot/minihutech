@@ -73,14 +73,14 @@ class CategoryProduct extends Controller
 
         DB::table('tbl_category_product')->insert($data);
         session()->put('message', 'Thêm danh mục sản phẩm thành công');
-        return Redirect::to('all-category-product');
+        return Redirect::to('add-category-product');
     }
 
     public function unactive_category_product($category_product_id){
         $this->AuthLogin();
         DB::table('tbl_category_product')->where('category_id', $category_product_id)->update(['category_status' => 1]);
         session()->put('message', 'Đã cập nhật trạng thái danh mục sản phẩm thành công');
-        return Redirect::to('all-category-product');
+        return Redirect::to('add-category-product');
     }
 
     public function active_category_product($category_product_id){
