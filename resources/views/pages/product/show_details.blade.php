@@ -42,7 +42,7 @@
                 @csrf
                 <input type="hidden" value="{{$value->product_id}}" class="cart_product_id_{{$value->product_id}}">
                 <input type="hidden" value="{{$value->product_name}}" class="cart_product_name_{{$value->product_id}}">
-                <input type="hidden" value="{{$value->product_name}}" class="cart_product_name_{{$value->product_id}}">
+                <input type="hidden" value="{{$value->product_image}}" class="cart_product_image_{{$value->product_id}}">
                 <input type="hidden" value="{{$value->product_quantity}}" class="cart_product_quantity_{{$value->product_id}}">
                 <input type="hidden" value="{{$value->product_price}}" class="cart_product_price_{{$value->product_id}}">
                         

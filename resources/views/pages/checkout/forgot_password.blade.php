@@ -4,6 +4,15 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-sm-offset-1">
+                @if(Session::has('message'))
+                    <div class="alert alert-success">
+                        {!! Session::get('message') !!}
+                    </div>
+                @elseif(Session::has('error'))
+                    <div class="alert alert-danger">
+                        {!! Session::get('error') !!}
+                    </div>
+                @endif
                 <div class="login-form"><!--login form-->
                     <h2>Điền email đăng nhập lấy lại mật khẩu</h2>
                     <form action="{{URL::to('/recover-password')}}" method="POST">

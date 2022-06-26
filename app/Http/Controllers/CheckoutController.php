@@ -11,6 +11,7 @@ use App\Models\CategoryPost;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 use App\Models\City;
+use App\Models\Coupon;
 use App\Models\Province;
 use App\Models\Wards;
 use App\Models\FeeShip;
@@ -100,7 +101,13 @@ class CheckoutController extends Controller
 
     public function confirm_order(Request $request){
         $data = $request->all();
-
+        //get coupon
+        $coupon = Coupon::where('coupon_code', $data['order_coupon'])->first();
+        $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
+        $coupon->coupon_times =  $coupon->coupon_times - 1;
+       
+        $coupon->save();
+        //get van chuyen
         $shipping = new Shipping();
         $shipping->shipping_name = $data['shipping_name'];
         $shipping->shipping_email = $data['shipping_email'];
@@ -113,7 +120,7 @@ class CheckoutController extends Controller
 
         $checkout_code = substr(md5(microtime()),rand(0,26),5);
 
- 
+        //get order
         $order = new Order;
         $order->customer_id = Session::get('customer_id');
         $order->shipping_id = $shipping_id;
@@ -270,7 +277,9 @@ class CheckoutController extends Controller
     }
 
     public function logout_checkout(){
-        session()->flush();
+        Session::forget('customer_id');
+        Session::forget('coupon');
+
         return Redirect::to('/login-checkout');
     }
 
@@ -278,13 +287,18 @@ class CheckoutController extends Controller
         $email = $request->email_account;
         $password = md5($request->password_account);
         $result = DB::table('tbl_customers')->where('customer_email', $email)->where('customer_password', $password)->first();
-
+        if(Session::get('coupon') == true){
+            Session::forget('coupon');
+        }
+        
         if($result){
             session()->put('customer_id', $result->customer_id);
             return Redirect::to('/checkout');
         } else{
             return Redirect::to('/login-checkout');
         }
+        Session::save();
+        
     }
 
     public function order_place(Request $request){

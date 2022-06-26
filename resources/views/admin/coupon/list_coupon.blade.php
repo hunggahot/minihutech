@@ -6,8 +6,9 @@
         Liệt kê mã giảm giá
       </div>
       
-      <p><a href="{{url('/send-coupon')}}" class="btn btn-default">Gửi mã giảm giá cho khách vip</a></p>
-
+      <p><a href="{{url('/send-coupon-vip')}}" class="btn btn-default">Gửi mã giảm giá cho khách vip</a></p>
+      <p><a href="{{url('/send-coupon')}}" class="btn btn-default">Gửi mã giảm giá cho khách thường</a></p>
+      
       <div class="table-responsive">
         <?php
             $message = Session::get('message');
@@ -20,11 +21,15 @@
           <thead>
             <tr>
               
-              <th>Tiêu đề giảm giá</th>
+              <th>Tên mã giảm giá</th>
+              <th>Ngày bắt đầu</th>
+              <th>Ngày kết thúc</th>
               <th>Mã giảm giá</th>
               <th>Số lượng mã</th>
-              <th>Trạng thái</th>
+              <th>Điều kiện giảm giá</th>
               <th>Số giảm</th>
+              <th>Tình trạng</th>
+              <th>Hết hạn</th>
               <th></th>
               
             </tr>
@@ -34,8 +39,11 @@
             <tr>
               
               <td>{{ $cou->coupon_name }}</td>
+              <td>{{ $cou->coupon_date_start }}</td>
+              <td>{{ $cou->coupon_date_end }}</td>
               <td>{{ $cou->coupon_code }}</td>
               <td>{{ $cou->coupon_times }}</td>
+              
               <td>
                 <span class="text-ellipsis">
                 <?php
@@ -51,6 +59,7 @@
                 ?>
                 </span>
              </td>
+              
 
               <td>
                 <span class="text-ellipsis">
@@ -67,7 +76,28 @@
                 ?>
                 </span>
             </td>
-
+            <td>
+              <span class="text-ellipsis">
+              <?php
+                  if($cou->coupon_status == 1){
+              ?>
+                <span style="color: green">Đang kích hoạt</span> 
+              <?php
+              }else{
+              ?>
+                  <span style="color: red">Đã khóa</span> 
+              <?php
+              }
+              ?>
+              </span>
+           </td>
+           <td>
+                @if($cou->coupon_date_end>$today)
+                  <span style="color: green">Còn hạn</span>
+                @else
+                  <span style="color: red">Hết Hạn</span>
+                @endif
+           </td>
               <td>
                 <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" href="{{URL::to('/delete-coupon/'.$cou->coupon_id)}}" class="active styling-delete" ui-toggle-class="">
                     <i class="fa fa-times text-danger text"></i>

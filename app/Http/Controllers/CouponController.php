@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Coupon;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 session_start();
@@ -23,8 +24,9 @@ class CouponController extends Controller
     }
 
     public function list_coupon(){
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d/m/Y');
         $coupon = Coupon::orderby('coupon_id', 'desc')->get();
-        return view('admin.coupon.list_coupon')->with(compact('coupon'));
+        return view('admin.coupon.list_coupon')->with(compact('coupon', 'today'));
     }
 
     public function insert_coupon_code(Request $request){
@@ -33,6 +35,8 @@ class CouponController extends Controller
         $coupon = new Coupon;
 
         $coupon->coupon_name = $data['coupon_name'];
+        $coupon->coupon_date_start = $data['coupon_date_start'];
+        $coupon->coupon_date_end = $data['coupon_date_end'];
         $coupon->coupon_number = $data['coupon_number'];
         $coupon->coupon_code = $data['coupon_code'];
         $coupon->coupon_times = $data['coupon_times'];

@@ -153,7 +153,8 @@ Route::post('/calculate-fee', [CheckoutController::class, 'calculate_fee']);
 
 //send mail
 Route::get('/send-mail', [MailController::class, 'send_mail']);
-Route::get('/send-coupon', [MailController::class, 'send_coupon']);
+Route::get('/send-coupon-vip', [MailController::class, 'send_coupon_vip']);
+Route::get('/send-coupon-vip', [MailController::class, 'send_coupon']);
 
 //login user
 Route::get('/forgot-password', [MailController::class, 'forgot_password']);
