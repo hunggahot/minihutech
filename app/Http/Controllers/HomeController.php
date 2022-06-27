@@ -35,7 +35,7 @@ class HomeController extends Controller
 
         $brand_product = DB::table('tbl_brand')->where('brand_status', '0')->orderBy('brand_id', 'desc')->get();
 
-        $all_product = DB::table('tbl_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(6); 
+        $all_product = DB::table('tbl_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(8); 
 
         $cate_pro_tabs =  CategoryProductModels::where('category_parent','<>', 0)->orderBy('category_order', 'asc')->get();
         
@@ -67,11 +67,11 @@ class HomeController extends Controller
     }
 
     public function autocomplete_ajax(Request $request){
-        $data = $request->all();
+        $data = $request->all(); //bắt tất cả dữ liệu gửi qua hàm này
         if($data['query']){
-            $product = Product::where('product_status', 0)->where('product_name', 'like', '%'.$data['query'].'%')->get();
-            $output = '<ul class="dropdown-menu" style="display: block; position: relative">';
-            foreach($product as $key => $val){
+            $product = Product::where('product_status', 0)->where('product_name', 'like', '%'.$data['query'].'%')->get(); //lấy tên sản phẩm so sánh dữ liệu được đổ vào với % like là tìm chuỗi ký tự với bất kỳ độ dài nào
+            $output = '<ul class="dropdown-menu" style="display: block; position: relative">'; 
+            foreach($product as $key => $val){ // trả về dữ liệu $val đổ dữ liệu
                 $output .= '
                 <li class="li_search_ajax"><a href="#">'.$val->product_name.'</a></li>
                 ';

@@ -117,8 +117,10 @@ class OrderController extends Controller
 			border:1px solid #000;
 		}
 		</style>
-		<h1><center>Công ty TNHH một thành viên ABCD</center></h1>
-		<h4><center>Độc lập - Tự do - Hạnh phúc</center></h4>
+		<h1><center>Công ty TNHH một thành viên Mini HUTECH</center></h1>
+		<h4><center>Đại Học HUTECH - 5A Phân Khu E1, KCN Cao, Xa Lộ Hà Nội, P. Hiệp Phú, TP.Thủ ĐỨc</center></h4>
+		<span></span>
+		<h4><center>Hóa Đơn Bán Hàng</center></h4>
 		<p>Người đặt hàng</p>
 		<table class="table-styling">
 				<thead>

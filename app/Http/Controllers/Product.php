@@ -266,7 +266,7 @@ class Product extends Controller
         $product_related = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id', '=','tbl_product.category_id')
         ->join('tbl_brand','tbl_brand.brand_id', '=','tbl_product.brand_id')
-        ->where('tbl_category_product.category_id', $category_id)->whereNotIn('tbl_product.product_slug', [$product_slug])->paginate(6);
+        ->where('tbl_category_product.category_id', $category_id)->whereNotIn('tbl_product.product_slug', [$product_slug])->paginate(8);
 
         $rating = Rating::where('product_id', $product_id)->avg('rating');
         $rating = round($rating); // làm tròn số thành số nguyên

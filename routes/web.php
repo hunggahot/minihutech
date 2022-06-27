@@ -38,79 +38,90 @@ Route::get('/product-details/{product_slug}', [Product::class, 'product_details'
 Route::get('/tag/{product_tag}', [Product::class, 'tag']); 
 
 //comment
-Route::get('/comment', [Product::class, 'list_comment']); 
-
-Route::post('/load-comment', [Product::class, 'load_comment']); 
-Route::post('/send-comment', [Product::class, 'send_comment']); 
-Route::post('/allow-comment', [Product::class, 'allow_comment']); 
-Route::post('/reply-comment', [Product::class, 'reply_comment']); 
-
-//rating
-Route::post('/insert-rating', [Product::class, 'insert_rating']); 
+Route::group([ 'middleware' => 'auth.roles'], function(){
+    Route::get('/comment', [Product::class, 'list_comment']); 
+    
+    Route::post('/load-comment', [Product::class, 'load_comment']); 
+    Route::post('/send-comment', [Product::class, 'send_comment']); 
+    Route::post('/allow-comment', [Product::class, 'allow_comment']); 
+    Route::post('/reply-comment', [Product::class, 'reply_comment']); 
+    
+    //rating
+    Route::post('/insert-rating', [Product::class, 'insert_rating']); 
+});
 
 //category product
-Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product']);
-Route::get('/edit-category-product/{category_product_id}', [CategoryProduct::class, 'edit_category_product']);
-Route::get('/delete-category-product/{category_product_id}', [CategoryProduct::class, 'delete_category_product']);
+Route::group([ 'middleware' => 'auth.roles'], function(){
+    Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product']);
+    Route::get('/edit-category-product/{category_product_id}', [CategoryProduct::class, 'edit_category_product']);
+    Route::get('/delete-category-product/{category_product_id}', [CategoryProduct::class, 'delete_category_product']);
+    
+    Route::get('/unactive-category-product/{category_product_id}', [CategoryProduct::class, 'unactive_category_product']);
+    Route::get('/active-category-product/{category_product_id}', [CategoryProduct::class, 'active_category_product']);
+    
+    Route::post('/update-category-product/{category_product_id}', [CategoryProduct::class, 'update_category_product']);
+    Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
+    
+    Route::post('/arrange-category', [CategoryProduct::class, 'arrange_category']);
+    Route::post('/product-tabs', [CategoryProduct::class, 'product_tabs']);
+    
+    Route::post('/export-csv', [CategoryProduct::class, 'export_csv']);
+});
 Route::get('/all-category-product', [CategoryProduct::class, 'all_category_product']);
 
-Route::get('/unactive-category-product/{category_product_id}', [CategoryProduct::class, 'unactive_category_product']);
-Route::get('/active-category-product/{category_product_id}', [CategoryProduct::class, 'active_category_product']);
-
-Route::post('/update-category-product/{category_product_id}', [CategoryProduct::class, 'update_category_product']);
-Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
-
-Route::post('/arrange-category', [CategoryProduct::class, 'arrange_category']);
-Route::post('/product-tabs', [CategoryProduct::class, 'product_tabs']);
-
-Route::post('/export-csv', [CategoryProduct::class, 'export_csv']);
 Route::post('/import-csv', [CategoryProduct::class, 'import_csv']);
 
 //category post
-Route::get('/add-category-post', [CategoryPostController::class, 'add_category_post']);
+Route::group([ 'middleware' => 'auth.roles'], function(){
+    Route::get('/add-category-post', [CategoryPostController::class, 'add_category_post']);
+    Route::get('/edit-category-post/{category_post_id}', [CategoryPostController::class, 'edit_category_post']);
+    Route::get('/category-post/{cate_post_slug}', [CategoryPostController::class, 'category_post']);
+    Route::get('/delete-category-post/{cate_id}', [CategoryPostController::class, 'delete_category_post']);
+    
+    Route::post('/save-category-post', [CategoryPostController::class, 'save_category_post']);
+    Route::post('/update-category-post/{cate_id}', [CategoryPostController::class, 'update_category_post']);
+});
 Route::get('/all-category-post', [CategoryPostController::class, 'all_category_post']);
-Route::get('/edit-category-post/{category_post_id}', [CategoryPostController::class, 'edit_category_post']);
-Route::get('/category-post/{cate_post_slug}', [CategoryPostController::class, 'category_post']);
-Route::get('/delete-category-post/{cate_id}', [CategoryPostController::class, 'delete_category_post']);
-
-Route::post('/save-category-post', [CategoryPostController::class, 'save_category_post']);
-Route::post('/update-category-post/{cate_id}', [CategoryPostController::class, 'update_category_post']);
 
 //homepage post
 Route::get('/hutech-category-post/{post_slug}', [PostController::class, 'hutech_category_post']);
 Route::get('/post/{post_slug}', [PostController::class, 'post']);
 
 //admin post
-Route::get('/add-post', [PostController::class, 'add_post']);
+Route::group([ 'middleware' => 'auth.roles'], function(){
+    Route::get('/add-post', [PostController::class, 'add_post']);
+    Route::get('/delete-post/{post_id}', [PostController::class, 'delete_post']);
+    Route::get('/edit-post/{post_id}', [PostController::class, 'edit_post']);
+    
+    Route::post('/update-post/{post_id}', [PostController::class, 'update_post']);
+    Route::post('/save-post', [PostController::class, 'save_post']);
+});
 Route::get('/all-post', [PostController::class, 'all_post']);
-Route::get('/delete-post/{post_id}', [PostController::class, 'delete_post']);
-Route::get('/edit-post/{post_id}', [PostController::class, 'edit_post']);
-
-Route::post('/update-post/{post_id}', [PostController::class, 'update_post']);
-Route::post('/save-post', [PostController::class, 'save_post']);
 
 //brand product
-Route::get('/add-brand-product', [BrandProduct::class, 'add_brand_product']);
-Route::get('/edit-brand-product/{brand_product_id}', [BrandProduct::class, 'edit_brand_product']);
-Route::get('/delete-brand-product/{brand_product_id}', [BrandProduct::class, 'delete_brand_product']);
+Route::group([ 'middleware' => 'auth.roles'], function(){
+    Route::get('/add-brand-product', [BrandProduct::class, 'add_brand_product']);
+    Route::get('/edit-brand-product/{brand_product_id}', [BrandProduct::class, 'edit_brand_product']);
+    Route::get('/delete-brand-product/{brand_product_id}', [BrandProduct::class, 'delete_brand_product']);
+    
+    Route::get('/unactive-brand-product/{brand_product_id}', [BrandProduct::class, 'unactive_brand_product']);
+    Route::get('/active-brand-product/{brand_product_id}', [BrandProduct::class, 'active_brand_product']);
+    
+    Route::post('/update-brand-product/{brand_product_id}', [BrandProduct::class, 'update_brand_product']);
+    Route::post('/save-brand-product', [BrandProduct::class, 'save_brand_product']);
+});
 Route::get('/all-brand-product', [BrandProduct::class, 'all_brand_product']);
-
-Route::get('/unactive-brand-product/{brand_product_id}', [BrandProduct::class, 'unactive_brand_product']);
-Route::get('/active-brand-product/{brand_product_id}', [BrandProduct::class, 'active_brand_product']);
-
-Route::post('/update-brand-product/{brand_product_id}', [BrandProduct::class, 'update_brand_product']);
-Route::post('/save-brand-product', [BrandProduct::class, 'save_brand_product']);
 
 //product
 Route::group([ 'middleware' => 'auth.roles'], function(){
     Route::get('/add-product', [Product::class, 'add_product']);
     Route::get('/edit-product/{product_id}', [Product::class, 'edit_product']);
+    Route::get('/delete-product/{product_id}', [Product::class, 'delete_product']);
+    
+    Route::get('/unactive-product/{product_id}', [Product::class, 'unactive_product']);
+    Route::get('/active-product/{product_id}', [Product::class, 'active_product']);
 });
-Route::get('/delete-product/{product_id}', [Product::class, 'delete_product']);
 Route::get('/all-product', [Product::class, 'all_product']);
-
-Route::get('/unactive-product/{product_id}', [Product::class, 'unactive_product']);
-Route::get('/active-product/{product_id}', [Product::class, 'active_product']);
 
 Route::post('/update-product/{product_id}', [Product::class, 'update_product']);
 Route::post('/save-product', [Product::class, 'save_product']);
@@ -223,12 +234,14 @@ Route::post('store-users', [UserController::class, 'store_users']);
 Route::post('assign-roles', [UserController::class, 'assign_roles'])->middleware('auth.roles');
 
 //gallery
-Route::get('add-gallery/{product_id}', [GalleryController::class, 'add_gallery']);
-
-Route::post('select-gallery', [GalleryController::class, 'select_gallery']);
-Route::post('insert-gallery/{pro_id}', [GalleryController::class, 'insert_gallery']);
-Route::post('update-gallery-name', [GalleryController::class, 'update_gallery_name']);
-Route::post('delete-gallery', [GalleryController::class, 'delete_gallery']);
-Route::post('update-gallery', [GalleryController::class, 'update_gallery']);
+Route::group([ 'middleware' => 'auth.roles'], function(){
+    Route::get('add-gallery/{product_id}', [GalleryController::class, 'add_gallery']);
+    
+    Route::post('select-gallery', [GalleryController::class, 'select_gallery']);
+    Route::post('insert-gallery/{pro_id}', [GalleryController::class, 'insert_gallery']);
+    Route::post('update-gallery-name', [GalleryController::class, 'update_gallery_name']);
+    Route::post('delete-gallery', [GalleryController::class, 'delete_gallery']);
+    Route::post('update-gallery', [GalleryController::class, 'update_gallery']);
+});
 
 Route::post('/momo-payment', [CheckoutController::class, 'momo_payment']);

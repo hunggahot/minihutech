@@ -145,13 +145,13 @@ class CategoryProduct extends Controller
             $sort_by = $_GET['sort_by'];
 
             if($sort_by == 'giam_dan'){
-                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_price', 'desc')->paginate(6)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_price', 'desc')->paginate(8)->appends(request()->query());
             } elseif($sort_by == 'tang_dan'){
-                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_price', 'asc')->paginate(6)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_price', 'asc')->paginate(8)->appends(request()->query());
             } elseif($sort_by == 'kytu_az'){
-                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_name', 'asc')->paginate(6)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_name', 'asc')->paginate(8)->appends(request()->query());
             } elseif($sort_by == 'kytu_za'){
-                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_name', 'desc')->paginate(6)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_name', 'desc')->paginate(8)->appends(request()->query());
             }
         } else{
             $category_by_id = Product::with('category')->where('category_id', $category_id)->orderBy('product_id', 'desc')->paginate(6);

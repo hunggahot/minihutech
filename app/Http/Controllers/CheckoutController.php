@@ -102,11 +102,11 @@ class CheckoutController extends Controller
     public function confirm_order(Request $request){
         $data = $request->all();
         //get coupon
-        $coupon = Coupon::where('coupon_code', $data['order_coupon'])->first();
-        $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
-        $coupon->coupon_times =  $coupon->coupon_times - 1;
+        // $coupon = Coupon::where('coupon_code', $data['order_coupon'])->first();
+        // $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
+        // $coupon->coupon_times =  $coupon->coupon_times - 1;
        
-        $coupon->save();
+        // $coupon->save();
         //get van chuyen
         $shipping = new Shipping();
         $shipping->shipping_name = $data['shipping_name'];

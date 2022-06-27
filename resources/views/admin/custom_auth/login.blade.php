@@ -47,16 +47,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="clearfix"></div>
 					<input type="submit" value="Đăng Nhập" name="login">
 
-					<div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
-					<br/>
-					@if($errors->has('g-recaptcha-response'))
-					<span class="invalid-feedback" style="display:block">
-						<strong>{{$errors->first('g-recaptcha-response')}}</strong>
-					</span>
-					@endif
+				
 			</form>
-			<a href="{{URL::to('/login-facebook')}}">Đăng nhập bằng Facbook</a> |
-			<a href="{{URL::to('/login-google')}}">Đăng nhập bằng Google</a> |
 			<a href="{{URL::to('/register-auth')}}">Đăng ký Auth</a> |
 			<a href="{{URL::to('/login-auth')}}">Đăng nhập Auth</a>
 	</div>		

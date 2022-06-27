@@ -168,10 +168,11 @@
         <div class="carousel-inner">
             <div class="item active">
                 @foreach($related as $key => $relate)
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
+                                <a href="{{URL::to('/product-details/'.$relate->product_slug)}}">
                                 <img src="{{URL::to('public/uploads/product/'.$relate->product_image)}}" alt="" />
                                 <h2>{{number_format($relate->product_price)}}<sup>đ</sup></h2>
                                 <p>{{$relate->product_name}}</p>

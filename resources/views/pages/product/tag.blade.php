@@ -3,10 +3,15 @@
 @extends('index')
 @section('content')
 
+@section('sidebar')
+    @include('pages.include.sidebar')
+@endsection
+
+
 <div class="features_items"><!--features_items-->
     <h2 class="title text-center">Tag: {{$product_tag}}</h2>
     @foreach($pro_tag as $key => $product)
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div class="product-image-wrapper">
             <div class="single-products">
                     <div class="productinfo text-center">
@@ -28,12 +33,12 @@
                         </form>
                     </div>
             </div>
-            <div class="choose">
+            {{-- <div class="choose">
                 <ul class="nav nav-pills nav-justified">
                     <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào yêu thích</a></li>
                     <li><a href="#"><i class="fa fa-plus-square"></i>So sánh sản phẩm</a></li>
                 </ul>
-            </div>
+            </div> --}}
         </div>
     </div>
     @endforeach

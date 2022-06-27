@@ -240,49 +240,9 @@
     <script src="{{asset('public/frontend/js/prettify.js')}}"></script>
     
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-    <script>
-        paypal.Button.render({
-            // Configure environment
-            env: 'sandbox',
 
-            client: {
-            sandbox: 'AfZnHo8XPiaAIpU4GVXCtk0CVmP64mgLzue1Ctnr-vOQKXxMvSwToNyge2bUKfsLJpLqviRAuOqjMFlb',
-            production: 'demo_production_client_id'
-            },
-            // Customize button (optional)
-            locale: 'en_US',
-            style: {
-            size: 'small',
-            color: 'gold',
-            shape: 'pill',
-            },
-
-            // Enable Pay Now checkout flow (optional)
-            commit: true,
-
-            // Set up a payment
-            payment: function(data, actions) {
-            return actions.payment.create({
-                transactions: [{
-                amount: {
-                    total: '0.01',
-                    currency: 'USD'
-                }
-                }]
-            });
-            },
-            // Execute the payment
-            onAuthorize: function(data, actions) {
-            return actions.payment.execute().then(function() {
-                // Show a confirmation message to the buyer
-                window.alert('Cảm ơn bạn đã mua hàng của chúng tôi');
-            });
-            }
-        }, '#paypal-button');
-
-    </script>
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function(){ //bộ lọc sản phẩm, reload sau khi chọn
 
             $('#sort').on('change', function(){
                 var url = $(this).val();
@@ -428,17 +388,17 @@
     </script>
 
     <script type="text/javascript">
-        $('#keywords').keyup(function(){
-            var query = $(this).val();
-            if(query != ''){
+        $('#keywords').keyup(function(){ //keyup: nhập vào ký tự nào thì ra ký tự đó
+            var query = $(this).val(); //this: lấy dữ liệu dựa vào id keywords
+            if(query != ''){ //nếu không rỗng -> lấy token rồi thực hiện ajax
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
-                    url: '{{url('/autocomplete-ajax')}}',
+                    url: '{{url('/autocomplete-ajax')}}', //kích hoạt ajax truyền url theo phương thức post
                     method: "POST",
-                    data:{query:query, _token:_token},
-                    success:function(data){
-                        $('#search_ajax').fadeIn();
-                        $('#search_ajax').html(data);
+                    data:{query:query, _token:_token}, // gửi qua query(từ khóa đã nhập) và token
+                    success:function(data){ 
+                        $('#search_ajax').fadeIn(); //đổ dữ liệu hiển thị sản phẩm (fadein: hiệu ứng mờ)
+                        $('#search_ajax').html(data); //đổ html dữ liệu vào
                     }
                 });
             }else{
