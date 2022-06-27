@@ -206,14 +206,14 @@ ul.sidebar-menu li a.active i {
     padding: 20px;
 }
 .footer p {
-    color: #fff;
+    color: #8b5c7e;
     letter-spacing: 1px;
 }
 .footer p a {
     color: #744e7d;
 }
 .footer p a:hover {
-    color: #fff;
+    color: #8b5c7e;
 }
 .header {
     left:0;
@@ -247,7 +247,7 @@ ul.sidebar-menu li a.active i {
 }
 a.logo {
     font-size:32px;
-    color:#fff;
+    color:#8b5c7e;
     float:left;
     margin:20px 0 0 25px;
     text-transform:uppercase;
@@ -273,7 +273,7 @@ ul.top-menu {
     margin-top: 0;
 }
 ul.top-menu > li > a {
-    color: #fff;
+    color: #8b5c7e;
     font-size: 16px;
     background: #8b5c7e;
     padding: 4px 8px;
@@ -290,7 +290,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
 }
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
      background:#fa9fa4 !important;
-    color:#fff !important;
+    color:#8b5c7e !important;
 }
 .notify-row .badge {
     position:absolute;
