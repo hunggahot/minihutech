@@ -84,7 +84,6 @@
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
                                 
-
                                 <?php
                                     $customer_id = Session::get('customer_id');
                                     $shipping_id = Session::get('shipping_id');
@@ -405,7 +404,7 @@
                 $('#search_ajax').fadeOut();
             }
         });
-        $(document).on('click', 'li_search_ajax', function(){
+        $(document).on('click', 'li_search_ajax', function(){ //click chuột kích hoạt
             $('#keywords').val($(this).text());
             $('#search_ajax').fadeOut();
         });
