@@ -69,6 +69,14 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputPassword1">Size sản phẩm</label>
+                            <select name="product_size" class="form-control input-sm m-bot15">
+                                @foreach($size_product as $key => $size)
+                                <option value="{{$size->size_id}}">{{$size->size_number}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Tags sản phẩm</label>
                             <input type="text" name="product_tags" data-role="tagsinput" class="form-control" >
                         </div>

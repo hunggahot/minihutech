@@ -16,8 +16,10 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SizeController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
+use App\Models\Size;
 use Illuminate\Support\Facades\Route;
 
 
@@ -215,6 +217,15 @@ Route::get('/delete-slide/{slider_id}', [SliderController::class, 'delete_slide'
 
 Route::post('/insert-slider', [SliderController::class, 'insert_slider']);
 
+//size
+Route::get('/manage-size', [SizeController::class, 'manage_size']);
+Route::get('/add-size', [SizeController::class, 'add_size']);
+
+Route::get('/active-size/{size_id}', [SizeController::class, 'active_size']);
+Route::get('/unactive-size/{size_id}', [SizeController::class, 'unactive_size']);
+
+Route::post('/insert-size', [SizeController::class, 'insert_size']);
+
 //authentication roles
 Route::get('/register-auth', [AuthController::class, 'register_auth']);
 Route::get('/login-auth', [AuthController::class, 'login_auth']);
@@ -244,10 +255,5 @@ Route::group([ 'middleware' => 'auth.roles'], function(){
     Route::post('update-gallery', [GalleryController::class, 'update_gallery']);
 });
 
+//momo payment
 Route::post('/momo-payment', [CheckoutController::class, 'momo_payment']);
-
-
-
-
-// alo123456
-

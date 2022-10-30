@@ -94,7 +94,7 @@ class Product extends Controller
                             <div class="row style_comment" style="margin: 5px 40px">
                                         <div class="col-md-2">
                                           
-                                            <img width="80%" src="'.url('/public/frontend/images/194938.png').'" class="img img-responsive img-thumbnail">
+                                            <img width="80%" src="'.url('/public/frontends/images/194938.png').'" class="img img-responsive img-thumbnail">
                                         </div>
                                         <div class="col-md-10">
                                             <p style="color: green">@Admin</p>
@@ -114,7 +114,7 @@ class Product extends Controller
         $this->AuthLogin();
         $all_product = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id', '=','tbl_product.category_id')
-        ->join('tbl_brand','tbl_brand.brand_id', '=','tbl_product.brand_id')
+        ->join('tbl_brand','tbl_brand.brand_id', '=','tbl_product.brand_id')->join('tbl_size','tbl_size.size_id', '=','tbl_product.size_id')
         ->orderBy('tbl_product.product_id', 'desc')->get();
         $manager_product = view('admin.all_product')->with('all_product', $all_product);
         
@@ -125,8 +125,9 @@ class Product extends Controller
         $this->AuthLogin();
         $cate_product = DB::table('tbl_category_product')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->orderBy('brand_id', 'desc')->get();
+        $size_product = DB::table('tbl_size')->orderby('size_id', 'desc')->get();
 
-        return view('admin.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
+        return view('admin.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product)->with('size_product',  $size_product);
         
     }
 
@@ -142,6 +143,7 @@ class Product extends Controller
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
         $data['brand_id'] = $request->product_brand;
+        $data['size_id'] = $request->product_size;
         $data['product_status'] = $request->product_status;
         // $data['product_image'] = $request->product_image;
 
@@ -188,10 +190,11 @@ class Product extends Controller
         $this->AuthLogin();
         $cate_product = DB::table('tbl_category_product')->orderBy('category_id', 'desc')->get();
         $brand_product = DB::table('tbl_brand')->orderBy('brand_id', 'desc')->get();
+        $size_product = DB::table('tbl_size')->orderby('size_id', 'desc')->get();
 
         $edit_product = DB::table('tbl_product')->where('product_id', $product_id)->get();
 
-        $manager_product = view('admin.edit_product')->with('edit_product', $edit_product)->with('cate_product', $cate_product)->with('brand_product', $brand_product);
+        $manager_product = view('admin.edit_product')->with('edit_product', $edit_product)->with('cate_product', $cate_product)->with('brand_product', $brand_product)->with('size_product', $size_product);
 
         return view('admin_layout')->with('admin.edit_product', $manager_product);
     }
@@ -208,6 +211,7 @@ class Product extends Controller
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
         $data['brand_id'] = $request->product_brand;
+        $data['size_id'] = $request->product_size;
         $data['product_status'] = $request->product_status;
         $get_image = $request->file('product_image');
 

@@ -18,9 +18,9 @@ class HomeController extends Controller
 {
     public function index(Request $request){
         //Seo
-        $meta_des = "Siêu thị Mini giá rẻ, chất lượng. Đặc biệt dành cho sinh viên HUTECH";
-        $meta_keywords = "thuc pham, thực phẩm, thức uống";
-        $meta_title = "Siêu thị Mini HUTECH | Trang chủ";
+        $meta_des = "Thời trang chất lượng, giá cả phải chăng!";
+        $meta_keywords = "áo, quần, giày, dép, mũ";
+        $meta_title = "Hph Store";
         $meta_canonical = $request->url();
         //--Seo
 

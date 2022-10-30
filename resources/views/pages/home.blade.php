@@ -10,11 +10,15 @@
     @include('pages.include.sidebar')
 @endsection
 
+@section('category')
+    @include('pages.include.category')
+@endsection
+
 @section('content')
 
 <div class="features_items"><!--features_items-->
 
-    <div class="category-tab"><!--category-tab-->
+    {{-- <div class="category-tab"><!--category-tab-->
         <div class="col-sm-12">
             <ul class="nav nav-tabs">
                 @php
@@ -31,7 +35,7 @@
             </ul>
         </div>
         <div id="tabs_product"></div>
-    </div>
+    </div> --}}
     <h2 class="title text-center">Hàng mới về</h2>
     @foreach($all_product as $key => $product)
     <div class="col-sm-3">

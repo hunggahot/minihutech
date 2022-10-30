@@ -25,6 +25,7 @@
               <th>Thư viện ảnh sản phẩm</th>
               <th>Danh Mục sản phẩm</th>
               <th>Thương hiệu sản phẩm</th>
+              <th>Size sản phẩm</th>
               <th>Trạng thái sản phẩm</th>
               <th></th>
             </tr>
@@ -47,6 +48,7 @@
               <td><a href="{{('add-gallery/'.$pro->product_id)}}">Thêm thư viện ảnh</a></td>
               <td>{{ $pro -> category_name }}</td>
               <td>{{ $pro -> brand_name }}</td>
+              <td>{{ $pro -> size_number }}</td>
               <td><span class="text-ellipsis">
                 <?php
                     if($pro -> product_status == 0){

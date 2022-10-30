@@ -39,8 +39,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="{{URL::to('/dashboard')}}" class="logo">
-        <img style="width: 75%" src="{{asset('public/frontend/images/hutech_banner.png')}}" alt="">
+    <a href="{{URL::to('/dashboard')}}" class="logo" style="margin-left: 30px">
+        <img style="width: 75%" src="{{asset('public/frontendss/images/Kawaii_1.png')}}" alt="">
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
@@ -138,16 +138,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="{{URL::to('/all-category-product')}}">Liệt kê danh mục sản phẩm</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-book"></i>
-                            <span>Danh mục bài viết</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a href="{{URL::to('/add-category-post')}}">Thêm danh mục bài viết</a></li>
-                            <li><a href="{{URL::to('/all-category-post')}}">Liệt kê danh mục bài viết</a></li>
-                        </ul>
-                    </li>
+                
 				<li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
@@ -161,6 +152,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
+                        <span>Size</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/add-size')}}">Thêm Size</a></li>
+						<li><a href="{{URL::to('/all-size')}}">Liệt kê Size</a></li>
+                    </ul>
+                </li>
+				<li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
                         <span>Sản phẩm</span>
                     </a>
                     <ul class="sub">
@@ -168,17 +169,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="{{URL::to('/all-product')}}">Liệt kê sản phẩm</a></li>
                     </ul>
                     
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-book"></i>
-                        <span>Bài viết</span>
-                    </a>
-                    <ul class="sub">
-                         <li><a href="{{URL::to('/add-post')}}">Thêm bài viết</a></li>
-                        <li><a href="{{URL::to('/all-post')}}">Liệt kê bài viết</a></li>
-                      
-                    </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
@@ -225,7 +215,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  <!-- footer -->
 		  <div class="footer">
 			<div class="wthree-copyright">
-			  <p>© 2022 Siêu Thị Mini HUTECH</p>
+			  <p>© 2022 Hph Store</p>
 			</div>
 		  </div>
   <!-- / footer -->
