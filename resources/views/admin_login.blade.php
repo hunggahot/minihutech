@@ -1,9 +1,4 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+
 <!DOCTYPE html>
 <head>
 <title>Admin</title>
@@ -28,26 +23,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div class="log-w3">
-<div class="w3layouts-main">
-	<h2>Đăng Nhập</h2>
-	<?php
-		$message = Session::get('message');
-		if($message){
-			echo '<span class="text-alert">' ,$message. '</span>';
-			Session::put('message', null);
-		}
-	?>
-		<form action="{{URL::to('/admin-dashboard')}}" method="post"> 
-			{{ csrf_field() }} <!-- //sản sinh trường token -->
-			<input type="email" class="ggg" name="admin_email" placeholder="Email" required="">
-			<input type="password" class="ggg" name="admin_password" placeholder="Mật khẩu" required="">
-			<span><input type="checkbox" />Ghi nhớ tôi</span>
-			<h6><a href="#">Quên mật khẩu?</a></h6>
-				<div class="clearfix"></div>
-				<input type="submit" value="Đăng Nhập" name="login">
-		</form>
-		
-</div>
+	<div class="w3layouts-main">
+			<h2>Đăng Nhập</h2>
+			<?php
+			$message = Session::get('message');
+			if($message){
+				echo '<span class="text-alert">' ,$message. '</span>';
+				Session::put('message', null);
+			}
+			?>
+			<form action="{{URL::to('/admin-dashboard')}}" method="post"> 
+				{{ csrf_field() }} <!-- //sản sinh trường token -->
+				@foreach($errors->all() as $val)
+				<ul>
+					<li>{{$val}}</li>
+				</ul>
+					
+				@endforeach
+				<input type="email" class="ggg" name="admin_email" placeholder="Email">
+				<input type="password" class="ggg" name="admin_password" placeholder="Mật khẩu">
+				<span><input type="checkbox" />Ghi nhớ tôi</span>
+				<h6><a href="#">Quên mật khẩu?</a></h6>
+					<div class="clearfix"></div>
+					<input type="submit" value="Đăng Nhập" name="login">
+
+				
+			</form>
+			<a href="{{URL::to('/register-auth')}}">Đăng ký Auth</a> |
+			<a href="{{URL::to('/login-auth')}}">Đăng nhập Auth</a>
+	</div>		
 </div>
 <script src="{{asset('public/backend/js/bootstrap.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>
@@ -56,5 +60,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="{{asset('public/backend/js/jquery.scrollTo.js')}}"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>

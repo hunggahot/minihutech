@@ -1,0 +1,58 @@
+Date : 2022-06-25 21:04:22
+Directory : c:\xampp\htdocs\shopbanhanglaravel
+Total : 20 files,  419 codes, 19 comments, 79 blanks, all 517 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| PHP      |         18 |        354 |         19 |         79 |        452 |
+| JSON     |          2 |         65 |          0 |          0 |         65 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                        | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                           |         20 |        419 |         19 |         79 |        517 |
+| app                                                                                         |          8 |        177 |          8 |         55 |        240 |
+| app\Http                                                                                    |          6 |        171 |          8 |         53 |        232 |
+| app\Http\Controllers                                                                        |          6 |        171 |          8 |         53 |        232 |
+| app\Models                                                                                  |          2 |          6 |          0 |          2 |          8 |
+| config                                                                                      |          1 |         19 |          4 |          3 |         26 |
+| resources                                                                                   |          8 |        152 |          6 |         17 |        175 |
+| resources\views                                                                             |          8 |        152 |          6 |         17 |        175 |
+| resources\views\admin                                                                       |          1 |          1 |          0 |          1 |          2 |
+| resources\views\admin\coupon                                                                |          1 |          1 |          0 |          1 |          2 |
+| resources\views\pages                                                                       |          6 |         82 |          0 |          8 |         90 |
+| resources\views\pages\category                                                              |          1 |         15 |          0 |          2 |         17 |
+| resources\views\pages\checkout                                                              |          3 |         33 |          0 |          5 |         38 |
+| routes                                                                                      |          1 |          6 |          1 |          4 |         11 |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                    | language | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\CartController.php                  | PHP      |          2 |          0 |          1 |          3 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\CategoryProduct.php                 | PHP      |         61 |          1 |         13 |         75 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\CheckoutController.php              | PHP      |         49 |          5 |         14 |         68 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\HomeController.php                  | PHP      |         -8 |         -4 |         -1 |        -13 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\MailController.php                  | PHP      |         60 |          5 |         22 |         87 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\PaypalController.php                | PHP      |          7 |          1 |          4 |         12 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Models\CategoryProductModels.php                     | PHP      |          3 |          0 |          1 |          4 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Models\Product.php                                   | PHP      |          3 |          0 |          1 |          4 |
+| c:\xampp\htdocs\shopbanhanglaravel\composer.json                                            | JSON     |          1 |          0 |          0 |          1 |
+| c:\xampp\htdocs\shopbanhanglaravel\composer.lock                                            | JSON     |         64 |          0 |          0 |         64 |
+| c:\xampp\htdocs\shopbanhanglaravel\config\paypal.php                                        | PHP      |         19 |          4 |          3 |         26 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\admin\coupon\list_coupon.blade.php       | PHP      |          1 |          0 |          1 |          2 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\index.blade.php                          | PHP      |         69 |          6 |          8 |         83 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\category\show_category.blade.php   | PHP      |         15 |          0 |          2 |         17 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\checkout\forgot_password.blade.php | PHP      |         19 |          0 |          2 |         21 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\checkout\login_checkout.blade.php  | PHP      |          3 |          0 |          0 |          3 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\checkout\show_checkout.blade.php   | PHP      |         11 |          0 |          3 |         14 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\home.blade.php                     | PHP      |         18 |          0 |          1 |         19 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\send_coupon.blade.php              | PHP      |         16 |          0 |          0 |         16 |
+| c:\xampp\htdocs\shopbanhanglaravel\routes\web.php                                           | PHP      |          6 |          1 |          4 |         11 |
+| Total                                                                                       |          |        419 |         19 |         79 |        517 |
++---------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

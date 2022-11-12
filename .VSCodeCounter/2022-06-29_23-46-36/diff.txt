@@ -1,0 +1,73 @@
+Date : 2022-06-29 23:46:36
+Directory : c:\xampp\htdocs\shopbanhanglaravel
+Total : 29 files,  221 codes, 9 comments, 52 blanks, all 282 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| PHP      |         28 |        135 |          9 |         41 |        185 |
+| CSS      |          1 |         86 |          0 |         11 |         97 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                               | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                  |         29 |        221 |          9 |         52 |        282 |
+| app                                                                                                |          6 |        121 |         15 |         23 |        159 |
+| app\Http                                                                                           |          5 |        122 |         15 |         23 |        160 |
+| app\Http\Controllers                                                                               |          5 |        122 |         15 |         23 |        160 |
+| app\Models                                                                                         |          1 |         -1 |          0 |          0 |         -1 |
+| public                                                                                             |          1 |         86 |          0 |         11 |         97 |
+| public\frontend                                                                                    |          1 |         86 |          0 |         11 |         97 |
+| public\frontend\css                                                                                |          1 |         86 |          0 |         11 |         97 |
+| resources                                                                                          |         21 |         -1 |         -6 |         15 |          8 |
+| resources\views                                                                                    |         21 |         -1 |         -6 |         15 |          8 |
+| resources\views\admin                                                                              |          5 |         28 |          0 |          3 |         31 |
+| resources\views\admin\coupon                                                                       |          2 |         37 |          0 |          1 |         38 |
+| resources\views\admin\custom_auth                                                                  |          2 |        -16 |          0 |          2 |        -14 |
+| resources\views\pages                                                                              |         13 |        179 |          0 |         24 |        203 |
+| resources\views\pages\brand                                                                        |          1 |          6 |          0 |          2 |          8 |
+| resources\views\pages\category                                                                     |          1 |          6 |          0 |          3 |          9 |
+| resources\views\pages\checkout                                                                     |          5 |         66 |          0 |          3 |         69 |
+| resources\views\pages\include                                                                      |          2 |         78 |          0 |          9 |         87 |
+| resources\views\pages\product                                                                      |          2 |          1 |          0 |          4 |          5 |
+| routes                                                                                             |          1 |         15 |          0 |          3 |         18 |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                           | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\CartController.php                         | PHP      |         39 |          1 |          1 |         41 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\CheckoutController.php                     | PHP      |          6 |          7 |          1 |         14 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\CouponController.php                       | PHP      |          4 |          0 |          0 |          4 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\MailController.php                         | PHP      |         71 |          7 |         21 |         99 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Http\Controllers\OrderController.php                        | PHP      |          2 |          0 |          0 |          2 |
+| c:\xampp\htdocs\shopbanhanglaravel\app\Models\Coupon.php                                           | PHP      |         -1 |          0 |          0 |         -1 |
+| c:\xampp\htdocs\shopbanhanglaravel\public\frontend\css\main.css                                    | CSS      |         86 |          0 |         11 |         97 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\admin\add_product.blade.php                     | PHP      |          7 |          0 |          0 |          7 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\admin\coupon\insert_coupon.blade.php            | PHP      |          8 |          0 |          0 |          8 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\admin\coupon\list_coupon.blade.php              | PHP      |         29 |          0 |          1 |         30 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\admin\custom_auth\login.blade.php               | PHP      |         -9 |          0 |          1 |         -8 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\admin\custom_auth\register.blade.php            | PHP      |         -7 |          0 |          1 |         -6 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\admin_layout.blade.php                          | PHP      |         34 |          0 |          6 |         40 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\admin_login.blade.php                           | PHP      |         -9 |          0 |          1 |         -8 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\index.blade.php                                 | PHP      |       -233 |         -6 |        -19 |       -258 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\brand\show_brand.blade.php                | PHP      |          6 |          0 |          2 |          8 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\category\show_category.blade.php          | PHP      |          6 |          0 |          3 |          9 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\checkout\forget_password_notify.blade.php | PHP      |         12 |          0 |          0 |         12 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\checkout\forgot_password.blade.php        | PHP      |          9 |          0 |          0 |          9 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\checkout\login_checkout.blade.php         | PHP      |          6 |          0 |          1 |          7 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\checkout\new_password.blade.php           | PHP      |         34 |          0 |          2 |         36 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\checkout\show_checkout.blade.php          | PHP      |          5 |          0 |          0 |          5 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\home.blade.php                            | PHP      |          6 |          0 |          3 |          9 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\include\sidebar.blade.php                 | PHP      |         42 |          0 |          5 |         47 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\include\slider.blade.php                  | PHP      |         36 |          0 |          4 |         40 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\product\show_details.blade.php            | PHP      |         -2 |          0 |          2 |          0 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\product\tag.blade.php                     | PHP      |          3 |          0 |          2 |          5 |
+| c:\xampp\htdocs\shopbanhanglaravel\resources\views\pages\send_coupon_vip.blade.php                 | PHP      |         16 |          0 |          0 |         16 |
+| c:\xampp\htdocs\shopbanhanglaravel\routes\web.php                                                  | PHP      |         15 |          0 |          3 |         18 |
+| Total                                                                                              |          |        221 |          9 |         52 |        282 |
++----------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

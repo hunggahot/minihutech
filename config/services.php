@@ -31,4 +31,19 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'client_id' => '438166827758859',  //client face của bạn
+        'client_secret' => 'acbdeb30be5b0756a285b3df0dc7e5ed',  //client app service face của bạn
+        'redirect' => 'http://localhost/shopbanhanglaravel/admin/callback' //callback trả về
+    ],
+
+    
+    'google' => [
+        'client_id' => '64258202048-bf8g8jo3qmakkge2o4isujigponr4le3.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://localhost/shopbanhanglaravel/google/callback' 
+    ],
+
+
+
 ];

@@ -4,30 +4,53 @@
     <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    Basic Forms
+                    Thêm danh mục sản phẩm
                 </header>
+                <?php
+                    $message = Session::get('message');
+                    if($message){
+                        echo '<span class="text-alert">' ,$message. '</span>';
+                        Session::put('message', null);
+                    }
+                ?>
                 <div class="panel-body">
                     <div class="position-center">
-                        <form role="form">
+                        <form role="form" action="{{URL::to('/save-category-product')}}" method="post">
+                            {{csrf_field()}}
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <label for="exampleInputEmail1">Tên danh mục</label>
+                            <input type="text" name="category_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
-                            <input type="file" id="exampleInputFile">
-                            <p class="help-block">Example block-level help text here.</p>
+                            <label for="exampleInputEmail1">Slug danh mục</label>
+                            <input type="text" name="category_slug" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Check me out
-                            </label>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mô tả danh mục</label>
+                            <textarea style="resize: none;" rows="8" name="category_product_des" class="form-control" id="exampleInputPassword1" placeholder="Mô tả danh mục"> </textarea>
                         </div>
-                        <button type="submit" class="btn btn-info">Submit</button>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Từ khóa danh mục</label>
+                            <textarea style="resize: none;" rows="8" name="category_product_keywords" class="form-control" id="exampleInputPassword1" placeholder="Mô tả danh mục"> </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Thuộc danh mục</label>
+                            <select name="category_parent" class="form-control input-sm m-bot15">
+                                <option value="0">--Danh mục cha--</option>
+                                @foreach($category as $key => $val)
+                                <option value="{{$val->category_id}}">{{$val->category_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Hiển thị</label>
+                            <select name="category_product_status" class="form-control input-sm m-bot15">
+                                <option value="0">Hiển thị</option>
+                                <option value="1">Ẩn</option>
+                            </select>
+                        </div>
+                       
+                        <button type="submit" name="add_category_product" class="btn btn-info">Thêm danh mục</button>
                     </form>
                     </div>
 
