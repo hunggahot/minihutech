@@ -150,6 +150,10 @@ Route::get('/unset-coupon', [CouponController::class, 'unset_coupon']);
 
 Route::post('/insert-coupon-code', [CouponController::class, 'insert_coupon_code']);
 
+//user
+Route::get('/register-user', [UserController::class, 'register_user']);
+
+
 //payment
 Route::get('/login-checkout', [CheckoutController::class, 'login_checkout']);
 Route::get('/logout-checkout', [CheckoutController::class, 'logout_checkout']);

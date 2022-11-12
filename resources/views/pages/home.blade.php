@@ -51,12 +51,12 @@
                         <input type="hidden" value="{{$product->product_price}}" class="cart_product_price_{{$product->product_id}}">
                         <input type="hidden" value="1" class="cart_product_qty_{{$product->product_id}}">
                         <a href="{{URL::to('/product-details/'.$product->product_slug)}}">
-                        <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" />
+                        <img style="width: 200px; height: 220px; margin-top: 20px"src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" />
                         <h2>{{number_format($product->product_price,0,',','.')}}<sup>đ</sup></h2>
                         <p>{{$product->product_name}}</p>
                         </a>
                         {{-- <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a> --}}
-                        <button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart">Thêm vào giỏ hàng</button>
+                        {{-- <button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart">Thêm vào giỏ hàng</button> --}}
                         </form>
                     </div>
             </div>

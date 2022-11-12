@@ -63,15 +63,17 @@
                 </div>
                 <div class="col-sm-5" style="margin-top: 25px">
                     <div class="row mainmenu pull-right">
-                        <form class="col-sm-8 pull-left" role="search">
+                        <form action="{{URL::to('/search')}}" autocomplete="off" method="POST" class="col-sm-8 pull-left" role="search">
+                            {{ csrf_field() }}
                             <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                            <div id="search_ajax"></div>
                         </form>
                         <ul class="col-sm-4 nav navbar-nav collapse navbar-collapse pull-right" style="margin-top: 5px">
-                            <li><a href="{{URL::to('/homepage')}}" ><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="{{URL::to('/show-cart-ajax')}}" ><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="dropdown text-small"><a href="#"><i class="fa fa-user"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="{{URL::to('/login-checkout')}}">Sign in</a></li>
-                                    <li><a href="/register.html">Sign up</a></li>
+                                    <li><a href="{{URL::to('/register-user')}}">Sign up</a></li>
                                     <li><a href="#">Info</a></li>
                                     <li><hr class="solid"></li>
                                     <li><a href="#">Log out</a></li>

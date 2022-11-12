@@ -77,7 +77,7 @@ class Product extends Controller
             <div class="row style_comment">
                         <div class="col-md-2">
                           
-                            <img width="100%" src="'.url('/public/frontend/images/147142.png').'" class="img img-responsive img-thumbnail">
+                            <img width="60%" src="'.url('/public/frontendss/images/147142.png').'" class="img img-responsive img-thumbnail">
                         </div>
                         <div class="col-md-10">
                             <p style="color: blue">@'.$cmt->comment_name.'</p>
@@ -94,7 +94,7 @@ class Product extends Controller
                             <div class="row style_comment" style="margin: 5px 40px">
                                         <div class="col-md-2">
                                           
-                                            <img width="80%" src="'.url('/public/frontends/images/194938.png').'" class="img img-responsive img-thumbnail">
+                                            <img width="50%" src="'.url('/public/frontendss/images/194938.png').'" class="img img-responsive img-thumbnail">
                                         </div>
                                         <div class="col-md-10">
                                             <p style="color: green">@Admin</p>

@@ -37,8 +37,8 @@
 
     @foreach($category_by_id as $key => $product)
     <a href="{{URL::to('/product-details/'.$product->product_slug)}}">
-    <div class="col-sm-4">
-        <div class="product-image-wrapper">
+    <div class="col-sm-3">
+        {{-- <div class="product-image-wrapper"> --}}
             <div class="single-products">
                 <div class="productinfo text-center">
                     <form>
@@ -50,7 +50,7 @@
                     <input type="hidden" value="1" class="cart_product_qty_{{$product->product_id}}">
 
                     <a href="{{URL::to('/product-details/'.$product->product_slug)}}">
-                        <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" />
+                        <img style="width: 160px; height: 200px" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" />
                         <h2>{{number_format($product->product_price,0,',','.')}}<sup>đ</sup></h2>
                         <p>{{$product->product_name}}</p>
 
@@ -68,7 +68,7 @@
                     <li><a href="#"><i class="fa fa-plus-square"></i>So sánh sản phẩm</a></li>
                 </ul>
             </div>
-        </div>
+        {{-- </div> --}}
     </div>
     </a>
     @endforeach

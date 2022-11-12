@@ -10,6 +10,7 @@
             <div class="single-products">
                     <div class="productinfo text-center">
                         <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" />
+                        <a href="{{URL::to('/product-details/'.$product->product_slug)}}">
                         <h2>{{number_format($product->product_price)}}<sup>đ</sup></h2>
                         <p>{{$product->product_name}}</p>
                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
